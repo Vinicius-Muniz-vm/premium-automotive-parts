@@ -134,9 +134,9 @@
       };
 
       return (
-        <div className="fixed top-0 left-0 right-0 z-50 flex justify-center border-b border-white/5 bg-background/80 backdrop-blur-xl">
+        <div className="fixed top-0 left-0 right-0 z-[100] flex justify-center border-b border-white/5 bg-background/80 backdrop-blur-xl">
           <nav className="flex items-center justify-between px-6 py-4 w-full max-w-[1600px] text-foreground relative">
-            <div onClick={() => handleNav('home')} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer z-[60]">
+            <div onClick={() => handleNav('home')} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer z-[120]">
               <span className="text-xl md:text-2xl font-black text-white">PREMIUM</span>
               <span className="text-xl md:text-2xl font-semibold text-papGold">AUTOMOTIVE</span>
             </div>
@@ -150,12 +150,12 @@
               <a href="#contato" onClick={() => handleNav('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Localização</a>
             </div>
 
-            <div className="flex items-center gap-5 z-[60]">
+            <div className="flex items-center gap-5 z-[120]">
               <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="hidden sm:flex text-xs font-bold uppercase tracking-widest text-papGold items-center gap-2 hover:text-white transition-colors">
                 <i className="ph-fill ph-whatsapp-logo text-xl"></i> Fale Conosco
               </a>
               
-              <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-white flex items-center gap-2 p-1">
+              <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-white flex items-center gap-2 p-1 bg-black/50 rounded-lg px-3 py-1">
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em]">{isOpen ? 'Fechar' : 'Menu'}</span>
                 <i className={`ph-bold ${isOpen ? 'ph-x' : 'ph-list'} text-2xl`}></i>
               </button>
@@ -166,17 +166,18 @@
               initial={false}
               animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 bg-background/98 backdrop-blur-3xl lg:hidden z-50 flex flex-col items-center justify-center p-8"
+              className="fixed inset-0 bg-[#08080A] lg:hidden z-[110] flex flex-col items-center justify-center p-8 overflow-y-auto"
             >
-              <div className="flex flex-col items-center gap-10 text-xl font-bold tracking-[0.2em] uppercase">
-                <a href="#produtos" onClick={() => handleNav('home')} className="text-white hover:text-papGold transition-colors">Produtos</a>
-                <a href="#marcas" onClick={() => handleNav('home')} className="text-white hover:text-papGold transition-colors">Marcas Originais</a>
-                <a href="#sobre" onClick={() => handleNav('home')} className="text-white hover:text-papGold transition-colors">Empresa</a>
-                <button onClick={() => handleNav('vonixx')} className="font-sans font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors text-xl">Estética Automotiva</button>
-                <a href="#contato" onClick={() => handleNav('home')} className="text-white hover:text-papGold transition-colors">Localização</a>
+              <div className="flex flex-col items-center gap-10 text-xl font-bold tracking-[0.2em] uppercase text-center w-full max-w-xs">
+                <a href="#produtos" onClick={() => handleNav('home')} className="text-white hover:text-papGold transition-colors border-b border-white/5 w-full pb-4">Produtos</a>
+                <a href="#marcas" onClick={() => handleNav('home')} className="text-white hover:text-papGold transition-colors border-b border-white/5 w-full pb-4">Marcas Originais</a>
+                <a href="#sobre" onClick={() => handleNav('home')} className="text-white hover:text-papGold transition-colors border-b border-white/5 w-full pb-4">Empresa</a>
+                <button onClick={() => handleNav('vonixx')} className="font-sans font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors text-xl border-b border-white/5 w-full pb-4">Estética Automotiva</button>
+                <a href="#contato" onClick={() => handleNav('home')} className="text-white hover:text-papGold transition-colors border-b border-white/5 w-full pb-4">Localização</a>
                 
-                <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="text-papGold flex items-center gap-3 pt-8 border-t border-white/10 w-64 justify-center text-sm">
-                  <i className="ph-fill ph-whatsapp-logo text-2xl"></i> Fale Conosco
+                <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="text-papGold flex flex-col items-center gap-3 mt-4 w-full">
+                  <i className="ph-fill ph-whatsapp-logo text-4xl"></i>
+                  <span className="text-xs">Fale Conosco</span>
                 </a>
               </div>
             </motion.div>
