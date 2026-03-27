@@ -120,20 +120,20 @@ function PAPAccentButton({ children, onClick, className = "", outline = false, t
   );
 }
 
-function Navbar() {
+function Navbar({ onNavigate }) {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center border-b border-white/5 bg-background/80 backdrop-blur-xl">
       <nav className="flex items-center justify-between px-6 py-4 w-full max-w-[1600px] text-foreground">
-        <div className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer">
+        <div onClick={() => onNavigate('home')} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer">
            <span className="text-xl md:text-2xl font-black text-white">PREMIUM</span>
            <span className="text-xl md:text-2xl font-semibold text-papGold">AUTOMOTIVE</span>
         </div>
         <div className="hidden md:flex gap-10 text-xs font-bold tracking-widest uppercase opacity-80">
-          <a href="#produtos" className="hover:text-papGold hover:opacity-100 transition-colors">Produtos</a>
-          <a href="#marcas" className="hover:text-papGold hover:opacity-100 transition-colors">Marcas Originais</a>
-          <a href="#sobre" className="hover:text-papGold hover:opacity-100 transition-colors">Empresa</a>
-          <a href="#vonixx" className="hover:text-papGold hover:opacity-100 transition-colors">Linha Vonixx</a>
-          <a href="#contato" className="hover:text-papGold hover:opacity-100 transition-colors">Localização</a>
+          <a href="#produtos" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Produtos</a>
+          <a href="#marcas" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Marcas Originais</a>
+          <a href="#sobre" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Empresa</a>
+          <button onClick={() => onNavigate('vonixx')} className="hover:text-papGold hover:opacity-100 transition-colors">Linha Vonixx</button>
+          <a href="#contato" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Localização</a>
         </div>
         <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-widest text-papGold flex items-center gap-2 hover:text-white transition-colors">
           <i className="ph-fill ph-whatsapp-logo text-xl"></i> Fale Conosco
@@ -465,12 +465,13 @@ const vonixxProducts = [
   { id: 'native', name: 'NATIVE PASTE WAX', sizes: ['100G'], indicacao: 'PINTURA', superficie: 'PROTEÇÃO', disponibilidade: '100G', img: './assets/products/native.png' }
 ];
 
-function VonixxCatalog() {
+function VonixxPage({ onBack }) {
   const [selectedId, setSelectedId] = useState(vonixxProducts[0].id);
   const active = vonixxProducts.find(p => p.id === selectedId) || vonixxProducts[0];
   const [selectedSize, setSelectedSize] = useState(active.sizes[0]);
 
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     setSelectedSize(active.sizes[0]);
   }, [active.id]);
 
@@ -481,76 +482,126 @@ function VonixxCatalog() {
   };
 
   return (
-    <section id="vonixx" className="py-24 px-4 md:px-12 max-w-[1200px] mx-auto relative z-10">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-papGold/5 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="text-center mb-16 relative z-10">
-         <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-4 font-mono">Linha de Estética e Limpeza</div>
-         <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white mb-6">Produtos <span className="text-glow">Vonixx</span></h2>
-         <p className="text-slate-400 max-w-2xl mx-auto text-lg">Catálogo premium de detalhamento automotivo. Selecione um produto para conhecer as especificações e consultar disponibilidade.</p>
+    <div className="min-h-screen bg-background pt-24 pb-16">
+      {/* Navbar topo da página Vonixx */}
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center border-b border-white/5 bg-background/80 backdrop-blur-xl">
+        <nav className="flex items-center justify-between px-6 py-4 w-full max-w-[1600px] text-foreground">
+          <button onClick={onBack} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer">
+            <span className="text-xl md:text-2xl font-black text-white">PREMIUM</span>
+            <span className="text-xl md:text-2xl font-semibold text-papGold">AUTOMOTIVE</span>
+          </button>
+          <button onClick={onBack} className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-papGold transition-colors">
+            <i className="ph-bold ph-arrow-left text-lg"></i> Voltar ao Site
+          </button>
+          <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-widest text-papGold flex items-center gap-2 hover:text-white transition-colors">
+            <i className="ph-fill ph-whatsapp-logo text-xl"></i> Fale Conosco
+          </a>
+        </nav>
       </div>
 
-      <div className="max-w-md mx-auto bg-[#1c1c1e] p-8 md:p-10 rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-white/5">
-        <div className="relative mb-8">
-           <select 
-             className="w-full bg-[#111] border border-white/10 text-white font-bold p-4 rounded-sm focus:outline-none focus:border-papGold cursor-pointer appearance-none transition-colors shadow-inner"
-             value={selectedId} onChange={(e) => setSelectedId(e.target.value)}
-           >
-             {vonixxProducts.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
-           </select>
-           <i className="ph-bold ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"></i>
+      <div className="max-w-[1200px] mx-auto px-4 md:px-12">
+        {/* Header da página */}
+        <div className="text-center mb-12">
+          <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-4 font-mono">Linha de Estética e Limpeza</div>
+          <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-4">Produtos <span className="text-glow">Vonixx</span></h1>
+          <p className="text-slate-400 max-w-xl mx-auto">Selecione um produto para ver as especificações e consultar disponibilidade e valores.</p>
         </div>
 
-        <div className="flex justify-center items-center mb-8 h-64 bg-[#111] rounded-lg border border-white/5 p-4">
-           <img src={active.img} alt={active.name} onError={(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/200x500/111111/D4AF37.png?text='+active.name.split(' ')[0]}} className="max-h-full object-contain hover:scale-110 transition-transform duration-500" />
-        </div>
+        {/* Grid de produtos + card de detalhe */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
-        <div className="flex flex-col mb-6 mt-4 border-t border-white/10 pt-4">
-           <h3 className="text-3xl font-black text-white tracking-tight mb-3">{active.name}</h3>
-           <div className="flex flex-wrap gap-2">
-             {active.sizes.map(size => (
-               <button 
-                 key={size} 
-                 onClick={() => setSelectedSize(size)}
-                 className={`px-3 py-1.5 text-xs font-bold rounded-sm border transition-colors ${selectedSize === size ? 'bg-papGold text-black border-papGold' : 'bg-transparent text-slate-400 border-white/10 hover:border-papGold/50 hover:text-papGold'}`}
-               >
-                 {size}
-               </button>
-             ))}
-           </div>
-        </div>
+          {/* Lista lateral de produtos */}
+          <div className="flex flex-col gap-2">
+            {vonixxProducts.map(p => (
+              <button
+                key={p.id}
+                onClick={() => setSelectedId(p.id)}
+                className={`flex items-center gap-4 p-3 rounded-sm border text-left transition-all ${
+                  selectedId === p.id
+                    ? 'border-papGold bg-papGold/10 text-papGold'
+                    : 'border-white/5 bg-[#111] text-slate-300 hover:border-papGold/30 hover:text-white'
+                }`}
+              >
+                <img src={p.img} alt={p.name} className="w-10 h-10 object-contain flex-shrink-0" />
+                <span className="font-bold text-sm uppercase tracking-wider">{p.name}</span>
+              </button>
+            ))}
+          </div>
 
-        <div className="flex flex-col gap-[2px] mb-8">
-           <div className="flex gap-[2px] w-full">
-             <div className="bg-[#3a3a3c] text-papGold font-bold text-[10px] sm:text-xs p-3 w-[35%] uppercase tracking-wider flex items-center">Indicação</div>
-             <div className="bg-[#3a3a3c] text-white font-bold text-[10px] sm:text-xs p-3 w-[65%] uppercase tracking-wider flex items-center">{active.indicacao}</div>
-           </div>
-           <div className="flex gap-[2px] w-full">
-             <div className="bg-[#3a3a3c] text-papGold font-bold text-[10px] sm:text-xs p-3 w-[35%] uppercase tracking-wider flex items-center">Superfície</div>
-             <div className="bg-[#3a3a3c] text-white font-bold text-[10px] sm:text-xs p-3 w-[65%] uppercase tracking-wider flex items-center">{active.superficie}</div>
-           </div>
-           <div className="flex gap-[2px] w-full">
-             <div className="bg-[#3a3a3c] text-papGold font-bold text-[10px] sm:text-xs p-3 w-[35%] uppercase tracking-wider flex items-center">Disponível</div>
-             <div className="bg-[#3a3a3c] text-white font-bold text-[10px] sm:text-xs p-3 w-[65%] uppercase tracking-wider flex items-center">{active.disponibilidade}</div>
-           </div>
-        </div>
+          {/* Card de detalhe do produto */}
+          <div className="lg:col-span-2 bg-[#1c1c1e] p-8 rounded-xl border border-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
+            <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
+              <div className="flex-shrink-0 w-48 h-48 bg-[#111] rounded-lg flex items-center justify-center p-4">
+                <img
+                  src={active.img}
+                  alt={active.name}
+                  onError={(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/200x200/111111/D4AF37.png?text='+active.name.split(' ')[0]}}
+                  className="max-h-full object-contain hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-3xl font-black text-white tracking-tight mb-3">{active.name}</h2>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {active.sizes.map(size => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`px-4 py-2 text-sm font-bold rounded-sm border transition-colors ${
+                        selectedSize === size
+                          ? 'bg-papGold text-black border-papGold'
+                          : 'bg-transparent text-slate-400 border-white/10 hover:border-papGold/50 hover:text-papGold'
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex flex-col gap-[2px]">
+                  <div className="flex gap-[2px]">
+                    <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-3 w-[40%] uppercase tracking-wider">Indicação</div>
+                    <div className="bg-[#3a3a3c] text-white font-bold text-xs p-3 w-[60%] uppercase">{active.indicacao}</div>
+                  </div>
+                  <div className="flex gap-[2px]">
+                    <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-3 w-[40%] uppercase tracking-wider">Superfície</div>
+                    <div className="bg-[#3a3a3c] text-white font-bold text-xs p-3 w-[60%] uppercase">{active.superficie}</div>
+                  </div>
+                  <div className="flex gap-[2px]">
+                    <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-3 w-[40%] uppercase tracking-wider">Disponível</div>
+                    <div className="bg-[#3a3a3c] text-white font-bold text-xs p-3 w-[60%] uppercase">{active.disponibilidade}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button onClick={handleWhatsApp} className="w-full py-4 bg-[#25D366] hover:bg-white text-black font-black uppercase tracking-wider rounded-sm flex items-center justify-center gap-3 transition-colors shadow-[0_5px_20px_rgba(37,211,102,0.3)]">
+              Consultar via WhatsApp &nbsp;<i className="ph-bold ph-whatsapp-logo text-2xl"></i>
+            </button>
+          </div>
 
-        <button onClick={handleWhatsApp} className="w-full py-4 bg-[#25D366] hover:bg-white text-black font-black uppercase tracking-wider rounded-sm flex items-center justify-center gap-3 transition-colors shadow-[0_5px_20px_rgba(37,211,102,0.3)] hover:shadow-lg">
-           Consultar via WhatsApp <i className="ph-bold ph-whatsapp-logo text-2xl"></i>
-        </button>
+        </div>
       </div>
-    </section>
+
+      {/* Floating WhatsApp */}
+      <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-50 bg-papGold text-black w-14 h-14 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-110 transition-all duration-300">
+        <i className="ph-fill ph-whatsapp-logo text-3xl"></i>
+      </a>
+    </div>
   );
 }
 
 function App() {
+  const [page, setPage] = useState('home');
+
+  if (page === 'vonixx') {
+    return <VonixxPage onBack={() => setPage('home')} />;
+  }
+
   return (
     <div className="relative text-base antialiased bg-background">
-      <Navbar />
+      <Navbar onNavigate={(p) => { setPage(p); if (p === 'home') window.scrollTo(0,0); }} />
       <Hero />
       <BrandsMarquee />
       <Products />
       <Differentials />
-      <VonixxCatalog />
       <Contact />
       <Footer />
       <FloatingWhatsApp />
