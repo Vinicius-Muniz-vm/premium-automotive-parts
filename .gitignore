@@ -1,0 +1,8 @@
+# Scripts e arquivos temporários
+remove_bg.py
+url.txt
+assets/products/*_tmp
+
+# Sistema
+.DS_Store
+Thumbs.db
