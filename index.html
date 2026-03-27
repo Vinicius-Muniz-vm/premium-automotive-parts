@@ -135,29 +135,31 @@
 
       return (
         <>
-          {/* Main Navigation Bar */}
-          <div className="fixed top-0 left-0 right-0 z-[100] flex justify-center border-b border-white/5 bg-[#08080A]/80 backdrop-blur-xl">
-            <nav className="flex items-center justify-between px-6 py-4 w-full max-w-[1600px] text-foreground">
-              <div onClick={() => handleNav('home')} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer">
+          <div className="fixed top-0 left-0 right-0 z-[100] w-full border-b border-white/5 bg-[#08080A]/90 backdrop-blur-xl flex justify-center">
+            <nav className="flex items-center justify-between px-6 py-4 w-full max-w-[1600px] text-foreground relative">
+              <div onClick={() => handleNav('home')} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer relative z-[110]">
                 <span className="text-xl md:text-2xl font-black text-white">PREMIUM</span>
                 <span className="text-xl md:text-2xl font-semibold text-papGold">AUTOMOTIVE</span>
               </div>
 
               {/* Desktop Links */}
               <div className="hidden lg:flex gap-10 text-xs font-bold tracking-widest uppercase opacity-80">
-                <a href="#produtos" onClick={() => handleNav('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Produtos</a>
-                <a href="#marcas" onClick={() => handleNav('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Marcas Originais</a>
-                <a href="#sobre" onClick={() => handleNav('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Empresa</a>
-                <button onClick={() => handleNav('vonixx')} className="font-sans text-xs font-bold tracking-widest uppercase hover:text-papGold hover:opacity-100 transition-colors">Estética Automotiva</button>
-                <a href="#contato" onClick={() => handleNav('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Localização</a>
+                <a href="#produtos" onClick={() => handleNav('home')} className="hover:text-papGold hover:opacity-100 transition-colors cursor-pointer">Produtos</a>
+                <a href="#marcas" onClick={() => handleNav('home')} className="hover:text-papGold hover:opacity-100 transition-colors cursor-pointer">Marcas Originais</a>
+                <a href="#sobre" onClick={() => handleNav('home')} className="hover:text-papGold hover:opacity-100 transition-colors cursor-pointer">Empresa</a>
+                <button onClick={() => handleNav('vonixx')} className="text-xs font-bold tracking-widest uppercase hover:text-papGold hover:opacity-100 transition-colors cursor-pointer">Estética Automotiva</button>
+                <a href="#contato" onClick={() => handleNav('home')} className="hover:text-papGold hover:opacity-100 transition-colors cursor-pointer">Localização</a>
               </div>
 
-              <div className="flex items-center gap-5">
-                <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="hidden sm:flex text-xs font-bold uppercase tracking-widest text-papGold items-center gap-2 hover:text-white transition-colors">
+              <div className="flex items-center gap-5 relative z-[110]">
+                <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="hidden lg:flex text-xs font-bold uppercase tracking-widest text-papGold items-center gap-2 hover:text-white transition-colors cursor-pointer">
                   <i className="ph-fill ph-whatsapp-logo text-xl"></i> Fale Conosco
                 </a>
                 
-                <button onClick={() => setIsOpen(true)} className="lg:hidden text-white flex items-center gap-2 p-1 bg-white/5 rounded-lg px-3 py-1 border border-white/10 hover:bg-white/10 transition-colors">
+                <button 
+                  onClick={() => setIsOpen(true)} 
+                  className="lg:hidden text-white flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all cursor-pointer active:scale-95"
+                >
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Menu</span>
                   <i className="ph-bold ph-list text-2xl"></i>
                 </button>
@@ -165,29 +167,34 @@
             </nav>
           </div>
 
-          {/* Mobile Overlay Menu - Dedicated Full Screen */}
-          <div className={`fixed inset-0 z-[200] bg-black transition-transform duration-500 ease-in-out lg:hidden ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-            <div className="flex flex-col items-center justify-start min-h-screen p-8 pt-24 relative overflow-y-auto">
-              {/* Close Button Button */}
+          {/* Mobile Overlay Menu - Corrected Stacking */}
+          <div 
+            className={`fixed inset-0 z-[200] bg-black transition-all duration-300 lg:hidden ${
+              isOpen 
+                ? 'opacity-100 pointer-events-auto flex' 
+                : 'opacity-0 pointer-events-none hidden'
+            }`}
+          >
+            <div className="flex flex-col items-center justify-start min-h-screen w-full p-8 pt-24 relative overflow-y-auto bg-black">
               <button 
                 onClick={() => setIsOpen(false)} 
                 className="absolute top-8 right-8 text-white flex items-center gap-3 p-2 group"
               >
-                <span className="text-xs font-bold uppercase tracking-[0.3em] opacity-60 group-hover:opacity-100">Fechar</span>
+                <span className="text-xs font-bold uppercase tracking-[0.3em] opacity-60">Fechar</span>
                 <i className="ph-bold ph-x text-3xl text-papGold"></i>
               </button>
 
               <div className="flex flex-col items-center gap-8 text-center w-full max-w-sm">
-                <div className="mb-4 flex items-baseline gap-1 uppercase tracking-tighter opacity-100">
+                <div className="mb-4 flex items-baseline gap-1 uppercase tracking-tighter">
                   <span className="text-2xl font-black text-white">PREMIUM</span>
                   <span className="text-2xl font-semibold text-papGold">AUTOMOTIVE</span>
                 </div>
 
-                <a href="#produtos" onClick={() => handleNav('home')} className="text-xl font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors w-full py-4 border-b border-white/5">Produtos</a>
-                <a href="#marcas" onClick={() => handleNav('home')} className="text-xl font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors w-full py-4 border-b border-white/5">Marcas Originais</a>
-                <a href="#sobre" onClick={() => handleNav('home')} className="text-xl font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors w-full py-4 border-b border-white/5">Empresa</a>
+                <a href="#produtos" onClick={() => handleNav('home')} className="text-xl font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors w-full py-4 border-b border-white/5 text-center">Produtos</a>
+                <a href="#marcas" onClick={() => handleNav('home')} className="text-xl font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors w-full py-4 border-b border-white/5 text-center">Marcas Originais</a>
+                <a href="#sobre" onClick={() => handleNav('home')} className="text-xl font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors w-full py-4 border-b border-white/5 text-center">Empresa</a>
                 <button onClick={() => handleNav('vonixx')} className="font-sans text-xl font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors w-full py-4 border-b border-white/5 text-center">Estética Automotiva</button>
-                <a href="#contato" onClick={() => handleNav('home')} className="text-xl font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors w-full py-4 border-b border-white/5">Localização</a>
+                <a href="#contato" onClick={() => handleNav('home')} className="text-xl font-bold tracking-[0.2em] uppercase text-white hover:text-papGold transition-colors w-full py-4 border-b border-white/5 text-center">Localização</a>
                 
                 <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="mt-8 flex flex-col items-center gap-4 text-papGold group">
                   <div className="w-16 h-16 rounded-full border border-papGold/30 flex items-center justify-center group-hover:bg-papGold group-hover:text-black transition-all">
