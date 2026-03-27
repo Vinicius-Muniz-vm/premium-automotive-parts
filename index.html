@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Premium Automotive Parts — Importadora e Distribuidora</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              background: '#08080A', 
-              foreground: '#FFFFFF', 
-              papSilver: '#C0C0C0', 
-              papGold: '#D4AF37',   
-              card: 'rgba(20, 20, 22, 0.7)',
-              border: 'rgba(255, 255, 255, 0.1)',
-            },
-            fontFamily: {
-              sans: ['"Montserrat"', 'sans-serif'],
-              mono: ['"JetBrains Mono"', 'monospace'],
-            }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium Automotive Parts — Importadora e Distribuidora</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
+    rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#08080A',
+            foreground: '#FFFFFF',
+            papSilver: '#C0C0C0',
+            papGold: '#D4AF37',
+            card: 'rgba(20, 20, 22, 0.7)',
+            border: 'rgba(255, 255, 255, 0.1)',
+          },
+          fontFamily: {
+            sans: ['"Montserrat"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
           }
         }
       }
-    </script>
-    
-    <style type="text/tailwindcss">
-      @layer base {
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer base {
         body {
           background-color: theme('colors.background');
           color: theme('colors.foreground');
@@ -74,620 +77,619 @@
       ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
     </style>
 
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  </head>
-  <body class="font-sans overflow-x-hidden relative">
-    <div id="root"></div>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
 
-    <script type="text/babel">
-const { useState, useRef } = React;
-const { motion, useMotionValue, useSpring } = window.Motion;
+<body class="font-sans overflow-x-hidden relative">
+  <div id="root"></div>
 
-const SPRING_CFG = { type: "spring", stiffness: 100, damping: 20 };
+  <script type="text/babel">
+    const { useState, useRef } = React;
+    const { motion, useMotionValue, useSpring } = window.Motion;
 
-function PAPAccentButton({ children, onClick, className = "", outline = false, type = "button" }) {
-  const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { damping: 15, stiffness: 150, mass: 0.1 });
-  const springY = useSpring(y, { damping: 15, stiffness: 150, mass: 0.1 });
+    const SPRING_CFG = { type: "spring", stiffness: 100, damping: 20 };
 
-  const handleMouseMove = (e) => {
-    const rect = ref.current.getBoundingClientRect();
-    x.set((e.clientX - rect.left - rect.width / 2) * 0.2);
-    y.set((e.clientY - rect.top - rect.height / 2) * 0.2);
-  };
-  const handleMouseLeave = () => { x.set(0); y.set(0); };
+    function PAPAccentButton({ children, onClick, className = "", outline = false, type = "button" }) {
+      const ref = useRef(null);
+      const x = useMotionValue(0);
+      const y = useMotionValue(0);
+      const springX = useSpring(x, { damping: 15, stiffness: 150, mass: 0.1 });
+      const springY = useSpring(y, { damping: 15, stiffness: 150, mass: 0.1 });
 
-  const baseStyle = "relative px-8 py-4 font-bold flex items-center justify-center gap-2 overflow-hidden transition-all duration-300 rounded-sm uppercase tracking-wider text-sm";
-  const colorStyle = outline 
-    ? "border border-papGold text-papGold hover:bg-papGold hover:text-black shadow-[0_0_15px_rgba(212,175,55,0.15)]"
-    : "bg-papGold text-black hover:bg-white hover:text-black shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]";
+      const handleMouseMove = (e) => {
+        const rect = ref.current.getBoundingClientRect();
+        x.set((e.clientX - rect.left - rect.width / 2) * 0.2);
+        y.set((e.clientY - rect.top - rect.height / 2) * 0.2);
+      };
+      const handleMouseLeave = () => { x.set(0); y.set(0); };
 
-  return (
-    <motion.button
-      type={type}
-      ref={ref} onClick={onClick} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY }} whileTap={{ scale: 0.95 }}
-      className={`${baseStyle} ${colorStyle} ${className}`}
-    >
-      <span className="relative z-10 flex items-center gap-2">{children}</span>
-    </motion.button>
-  );
-}
+      const baseStyle = "relative px-8 py-4 font-bold flex items-center justify-center gap-2 overflow-hidden transition-all duration-300 rounded-sm uppercase tracking-wider text-sm";
+      const colorStyle = outline
+        ? "border border-papGold text-papGold hover:bg-papGold hover:text-black shadow-[0_0_15px_rgba(212,175,55,0.15)]"
+        : "bg-papGold text-black hover:bg-white hover:text-black shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]";
 
-function Navbar({ onNavigate }) {
-  return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center border-b border-white/5 bg-background/80 backdrop-blur-xl">
-      <nav className="flex items-center justify-between px-6 py-4 w-full max-w-[1600px] text-foreground">
-        <div onClick={() => onNavigate('home')} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer">
-           <span className="text-xl md:text-2xl font-black text-white">PREMIUM</span>
-           <span className="text-xl md:text-2xl font-semibold text-papGold">AUTOMOTIVE</span>
-        </div>
-        <div className="hidden md:flex gap-10 text-xs font-bold tracking-widest uppercase opacity-80">
-          <a href="#produtos" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Produtos</a>
-          <a href="#marcas" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Marcas Originais</a>
-          <a href="#sobre" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Empresa</a>
-          <button onClick={() => onNavigate('vonixx')} className="hover:text-papGold hover:opacity-100 transition-colors">Linha Vonixx</button>
-          <a href="#contato" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Localização</a>
-        </div>
-        <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-widest text-papGold flex items-center gap-2 hover:text-white transition-colors">
-          <i className="ph-fill ph-whatsapp-logo text-xl"></i> Fale Conosco
-        </a>
-      </nav>
-    </div>
-  );
-}
+      return (
+        <motion.button
+          type={type}
+          ref={ref} onClick={onClick} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}
+          style={{ x: springX, y: springY }} whileTap={{ scale: 0.95 }}
+          className={`${baseStyle} ${colorStyle} ${className}`}
+        >
+          <span className="relative z-10 flex items-center gap-2">{children}</span>
+        </motion.button>
+      );
+    }
 
-function Hero() {
-  return (
-    <section className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-black">
-      <img 
-        src="./assets/brabus_bg.jpg" 
-        className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity"
-        alt="Interior Mercedes-AMG EQS Brabus"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background"></div>
-      
-      <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-papSilver/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
-      <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-papGold/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
-
-      <div className="relative z-10 w-full px-4 md:px-12 max-w-[1600px] mx-auto flex flex-col items-start justify-center text-white pb-16">
-        <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ ...SPRING_CFG, delay: 0.2 }}>
-          
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <div className="w-8 h-[2px] bg-papGold"></div>
-            <div className="uppercase tracking-[0.3em] text-papGold font-semibold text-xs font-mono">
-              Importadora & Distribuidora
+    function Navbar({ onNavigate }) {
+      return (
+        <div className="fixed top-0 left-0 right-0 z-50 flex justify-center border-b border-white/5 bg-background/80 backdrop-blur-xl">
+          <nav className="flex items-center justify-between px-6 py-4 w-full max-w-[1600px] text-foreground">
+            <div onClick={() => onNavigate('home')} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer">
+              <span className="text-xl md:text-2xl font-black text-white">PREMIUM</span>
+              <span className="text-xl md:text-2xl font-semibold text-papGold">AUTOMOTIVE</span>
             </div>
-            <div className="hidden sm:block w-[1px] h-4 bg-white/20 mx-2"></div>
-            <div className="flex items-center gap-2 border border-papGold/30 bg-papGold/10 px-3 py-1 rounded-sm text-[10px] uppercase font-bold text-papGold shadow-[0_0_10px_rgba(212,175,55,0.15)]">
-               <i className="ph-fill ph-shield-check"></i> Peças Originais
+            <div className="hidden md:flex gap-10 text-xs font-bold tracking-widest uppercase opacity-80">
+              <a href="#produtos" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Produtos</a>
+              <a href="#marcas" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Marcas Originais</a>
+              <a href="#sobre" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Empresa</a>
+              <button onClick={() => onNavigate('vonixx')} className="font-sans text-xs font-bold tracking-widest uppercase hover:text-papGold hover:opacity-100 transition-colors">Estética Automotiva</button>
+              <a href="#contato" onClick={() => onNavigate('home')} className="hover:text-papGold hover:opacity-100 transition-colors">Localização</a>
+            </div>
+            <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-widest text-papGold flex items-center gap-2 hover:text-white transition-colors">
+              <i className="ph-fill ph-whatsapp-logo text-xl"></i> Fale Conosco
+            </a>
+          </nav>
+        </div>
+      );
+    }
+
+    function Hero() {
+      return (
+        <section className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-black">
+          <img
+            src="./assets/brabus_bg.jpg"
+            className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity"
+            alt="Interior Mercedes-AMG EQS Brabus"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background"></div>
+
+          <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-papSilver/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-papGold/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
+
+          <div className="relative z-10 w-full px-4 md:px-12 max-w-[1600px] mx-auto flex flex-col items-start justify-center text-white pb-16">
+            <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ ...SPRING_CFG, delay: 0.2 }}>
+
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <div className="w-8 h-[2px] bg-papGold"></div>
+                <div className="uppercase tracking-[0.3em] text-papGold font-semibold text-xs font-mono">
+                  Importadora & Distribuidora
+                </div>
+                <div className="hidden sm:block w-[1px] h-4 bg-white/20 mx-2"></div>
+                <div className="flex items-center gap-2 border border-papGold/30 bg-papGold/10 px-3 py-1 rounded-sm text-[10px] uppercase font-bold text-papGold shadow-[0_0_10px_rgba(212,175,55,0.15)]">
+                  <i className="ph-fill ph-shield-check"></i> Peças Originais
+                </div>
+              </div>
+
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-black uppercase leading-[0.95] mb-8 tracking-tighter">
+                O Padrão <span className="gradient-heading">Ouro</span><br /><span className="text-[0.65em] font-medium text-white/90">em Peças Automotivas.</span>
+              </h1>
+
+              <p className="text-lg md:text-xl text-slate-300 max-w-[60ch] leading-relaxed mb-10 font-medium">
+                A excelência que o seu veículo de luxo exige. Distribuímos o que há de melhor em peças originais e de reposição para montadoras europeias e marcas premium em todo o Brasil.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-6 mt-8">
+                <PAPAccentButton onClick={() => window.open('https://wa.me/551140350765', '_blank')}>
+                  <i className="ph-fill ph-whatsapp-logo text-lg"></i> Falar com Consultor
+                </PAPAccentButton>
+                <PAPAccentButton outline={true} onClick={() => window.location.href = '#marcas'}>
+                  Ver Marcas Atendidas
+                </PAPAccentButton>
+              </div>
+
+            </motion.div>
+          </div>
+
+          <div className="absolute bottom-12 left-12 flex items-center gap-4 text-white/40 font-mono text-xs uppercase tracking-widest hidden md:flex">
+            <div className="w-[1px] h-12 bg-white/20"></div>
+            <p>Scroll to Explore<br />Premium Excellence</p>
+          </div>
+        </section>
+      );
+    }
+
+    function BrandsMarquee() {
+      const brands = [
+        { name: "BMW", url: "https://cdn.simpleicons.org/bmw/white" },
+        { name: "MERCEDES-BENZ", url: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI0Ii8+PHBvbHlnb24gcG9pbnRzPSI1MCw1IDU1LDQ4IDg5LDcyLjUgNTAsNTUgMTEsNzIuNSA0NSw0OCIgZmlsbD0id2hpdGUiLz48L3N2Zz4=" },
+        { name: "AUDI", url: "https://cdn.simpleicons.org/audi/white", scale: 1.6 },
+        { name: "VOLVO", url: "https://cdn.simpleicons.org/volvo/white" },
+        { name: "PORSCHE", url: "https://cdn.simpleicons.org/porsche/white" },
+        { name: "LAND ROVER", url: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMjAwIj48ZWxsaXBzZSBjeD0iMjAwIiBjeT0iMTAwIiByeD0iMTkwIiByeT0iOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTIiLz48ZWxsaXBzZSBjeD0iMjAwIiBjeT0iMTAwIiByeD0iMTcwIiByeT0iNzIiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iNCIvPjxnIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0iJ0FyaWFsIEJsYWNrJywgJ0ltcGFjdCcsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iNjAiIGZvbnQtc3R5bGU9Iml0YWxpYyI+PHRleHQgeD0iMTQ1IiB5PSI5MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjEiPkxBTkQ8L3RleHQ+PHRleHQgeD0iMjU1IiB5PSIxNjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIxIj5ST1ZFUjwvdGV4dD48cG9seWdvbiBwb2ludHM9IjI4MCw1MCAzMjAsNTAgMzEwLDY1IDM0MCw2NSAzMzAsODAgMzAwLDgwIDMwNSw2NSAyNzAsNjUiLz48cG9seWdvbiBwb2ludHM9IjEyMCwxNTAgODAsMTUwIDkwLDEzNSA2MCwxMzUgNzAsMTIwIDEwMCwxMjAgOTUsMTM1IDEzMCwxMzUiLz48L2c+PC9zdmc+" },
+        { name: "FERRARI", url: "https://cdn.simpleicons.org/ferrari/white" },
+        { name: "LAMBORGHINI", url: "https://cdn.simpleicons.org/lamborghini/white" },
+        { name: "VOLKSWAGEN", url: "https://cdn.simpleicons.org/volkswagen/white" },
+        { name: "DODGE RAM", url: "https://cdn.simpleicons.org/ram/white", scale: 1.3 }
+      ];
+      return (
+        <section id="marcas" className="py-12 bg-[#050507] border-y border-white/5 overflow-hidden flex relative">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#050507] to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#050507] to-transparent z-10"></div>
+
+          <motion.div
+            className="flex whitespace-nowrap items-center gap-16 md:gap-32 pr-16 md:pr-32"
+            animate={{ x: [0, -2500] }}
+            transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
+          >
+            {[...brands, ...brands, ...brands].map((brand, i) => (
+              <div key={i} className="flex items-center gap-4 group cursor-default">
+                <img
+                  src={brand.url}
+                  alt={brand.name}
+                  className="h-10 md:h-12 w-auto object-contain opacity-30 group-hover:opacity-100 transition-all duration-500 group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                  style={brand.scale ? { transform: `scale(${brand.scale})` } : {}}
+                />
+                <span className="text-2xl md:text-3xl font-black text-white/30 tracking-widest uppercase group-hover:text-papGold transition-colors duration-500">
+                  {brand.name}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        </section>
+      );
+    }
+
+    const ProductCard = ({ icon, title, desc }) => {
+      const wpText = encodeURIComponent(`Olá! Gostaria de cotar peças da categoria: ${title}.`);
+
+      return (
+        <motion.a href={`https://wa.me/551140350765?text=${wpText}`} target="_blank" rel="noreferrer" whileHover={{ y: -5 }} className="pap-glass p-8 flex flex-col gap-6 group rounded-sm transition-all duration-300 cursor-pointer relative overflow-hidden block">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-papGold/0 rounded-full blur-3xl group-hover:bg-papGold/10 transition-colors"></div>
+
+          <div className="flex justify-between items-start">
+            <i className={`${icon} text-4xl text-slate-500 group-hover:text-papGold transition-colors duration-300 drop-shadow-[0_0_10px_rgba(212,175,55,0)] group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]`}></i>
+            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:border-papGold/50 transition-all -translate-x-4 group-hover:translate-x-0">
+              <i className="ph-bold ph-arrow-up-right text-papGold text-sm"></i>
             </div>
           </div>
-          
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-black uppercase leading-[0.95] mb-8 tracking-tighter">
-            O Padrão <span className="gradient-heading">Ouro</span><br/><span className="text-[0.65em] font-medium text-white/90">em Peças Automotivas.</span>
-          </h1>
-          
-          <p className="text-lg md:text-xl text-slate-300 max-w-[60ch] leading-relaxed mb-10 font-medium">
-            A excelência que o seu veículo de luxo exige. Distribuímos o que há de melhor em peças originais e de reposição para montadoras europeias e marcas premium em todo o Brasil.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 mt-8">
-             <PAPAccentButton onClick={() => window.open('https://wa.me/551140350765', '_blank')}>
-               <i className="ph-fill ph-whatsapp-logo text-lg"></i> Falar com Consultor
-             </PAPAccentButton>
-             <PAPAccentButton outline={true} onClick={() => window.location.href='#marcas'}>
-               Ver Marcas Atendidas
-             </PAPAccentButton>
+
+          <div>
+            <h3 className="text-xl font-bold uppercase tracking-tight mb-3 text-white group-hover:text-papGold transition-colors">{title}</h3>
+            <p className="text-sm text-slate-400 leading-relaxed font-medium">{desc}</p>
+          </div>
+        </motion.a>
+      );
+    }
+
+    function Products() {
+      return (
+        <section id="produtos" className="py-24 md:py-32 px-4 md:px-12 max-w-[1600px] mx-auto relative cursor-default">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div>
+              <h2 className="text-4xl md:text-5xl uppercase font-black tracking-tighter mb-4 text-glow">Categorias Premium</h2>
+              <p className="text-slate-400 text-lg max-w-2xl font-mono">Distribuição de ponta a ponta. Peças estruturais, elétricas e de performance de nível OEM.</p>
+            </div>
           </div>
 
-        </motion.div>
-      </div>
-
-      <div className="absolute bottom-12 left-12 flex items-center gap-4 text-white/40 font-mono text-xs uppercase tracking-widest hidden md:flex">
-         <div className="w-[1px] h-12 bg-white/20"></div>
-         <p>Scroll to Explore<br/>Premium Excellence</p>
-      </div>
-    </section>
-  );
-}
-
-function BrandsMarquee() {
-  const brands = [
-    { name: "BMW", url: "https://cdn.simpleicons.org/bmw/white" },
-    { name: "MERCEDES-BENZ", url: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI0Ii8+PHBvbHlnb24gcG9pbnRzPSI1MCw1IDU1LDQ4IDg5LDcyLjUgNTAsNTUgMTEsNzIuNSA0NSw0OCIgZmlsbD0id2hpdGUiLz48L3N2Zz4=" },
-    { name: "AUDI", url: "https://cdn.simpleicons.org/audi/white", scale: 1.6 },
-    { name: "VOLVO", url: "https://cdn.simpleicons.org/volvo/white" },
-    { name: "PORSCHE", url: "https://cdn.simpleicons.org/porsche/white" },
-    { name: "LAND ROVER", url: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMjAwIj48ZWxsaXBzZSBjeD0iMjAwIiBjeT0iMTAwIiByeD0iMTkwIiByeT0iOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTIiLz48ZWxsaXBzZSBjeD0iMjAwIiBjeT0iMTAwIiByeD0iMTcwIiByeT0iNzIiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iNCIvPjxnIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0iJ0FyaWFsIEJsYWNrJywgJ0ltcGFjdCcsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iNjAiIGZvbnQtc3R5bGU9Iml0YWxpYyI+PHRleHQgeD0iMTQ1IiB5PSI5MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjEiPkxBTkQ8L3RleHQ+PHRleHQgeD0iMjU1IiB5PSIxNjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIxIj5ST1ZFUjwvdGV4dD48cG9seWdvbiBwb2ludHM9IjI4MCw1MCAzMjAsNTAgMzEwLDY1IDM0MCw2NSAzMzAsODAgMzAwLDgwIDMwNSw2NSAyNzAsNjUiLz48cG9seWdvbiBwb2ludHM9IjEyMCwxNTAgODAsMTUwIDkwLDEzNSA2MCwxMzUgNzAsMTIwIDEwMCwxMjAgOTUsMTM1IDEzMCwxMzUiLz48L2c+PC9zdmc+" },
-    { name: "FERRARI", url: "https://cdn.simpleicons.org/ferrari/white" },
-    { name: "LAMBORGHINI", url: "https://cdn.simpleicons.org/lamborghini/white" },
-    { name: "VOLKSWAGEN", url: "https://cdn.simpleicons.org/volkswagen/white" },
-    { name: "DODGE RAM", url: "https://cdn.simpleicons.org/ram/white", scale: 1.3 }
-  ];
-  return (
-    <section id="marcas" className="py-12 bg-[#050507] border-y border-white/5 overflow-hidden flex relative">
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#050507] to-transparent z-10"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#050507] to-transparent z-10"></div>
-      
-      <motion.div 
-        className="flex whitespace-nowrap items-center gap-16 md:gap-32 pr-16 md:pr-32"
-        animate={{ x: [0, -2500] }}
-        transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
-      >
-        {[...brands, ...brands, ...brands].map((brand, i) => (
-          <div key={i} className="flex items-center gap-4 group cursor-default">
-            <img 
-               src={brand.url} 
-               alt={brand.name} 
-               className="h-10 md:h-12 w-auto object-contain opacity-30 group-hover:opacity-100 transition-all duration-500 group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]" 
-               style={brand.scale ? { transform: `scale(${brand.scale})` } : {}}
-            />
-            <span className="text-2xl md:text-3xl font-black text-white/30 tracking-widest uppercase group-hover:text-papGold transition-colors duration-500">
-              {brand.name}
-            </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <ProductCard icon="ph-bold ph-faders" title="Suspensão Especializada" desc="Amortecedores originais Bilstein, molas, bandejas e kits estruturais para carros de alta performance." />
+            <ProductCard icon="ph-bold ph-target" title="Freios de Alta Precisão" desc="Discos ventilados, pastilhas de cerâmica e fluidos, garantindo a frenagem exigida pelas montadoras europeias." />
+            <ProductCard icon="ph-bold ph-engine" title="Componentes de Motor" desc="Correias, tensionadores (Febi), retentores e válvulas projetados para durabilidade extrema térmica." />
+            <ProductCard icon="ph-bold ph-drop" title="Filtros e Lubrificantes" desc="Filtros de óleo, cabine e ar originais. Lubrificantes certificados pelas normas exigentes de BMW e Mercedes." />
+            <ProductCard icon="ph-bold ph-lightning" title="Elétrica e Injeção" desc="Sensores MAF, sondas lambda, velas Iridium e bobinas dedicadas ao funcionamento perfeito da ECU." />
+            <ProductCard icon="ph-bold ph-car-profile" title="Carroceria e Suportes" desc="Acabamentos de alto padrão, coxins hidráulicos e suportes focados em isolamento antivibração OEM." />
           </div>
-        ))}
-      </motion.div>
-    </section>
-  );
-}
+        </section>
+      );
+    }
 
-const ProductCard = ({ icon, title, desc }) => {
-  const wpText = encodeURIComponent(`Olá! Gostaria de cotar peças da categoria: ${title}.`);
-  
-  return (
-    <motion.a href={`https://wa.me/551140350765?text=${wpText}`} target="_blank" rel="noreferrer" whileHover={{ y: -5 }} className="pap-glass p-8 flex flex-col gap-6 group rounded-sm transition-all duration-300 cursor-pointer relative overflow-hidden block">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-papGold/0 rounded-full blur-3xl group-hover:bg-papGold/10 transition-colors"></div>
-      
-      <div className="flex justify-between items-start">
-         <i className={`${icon} text-4xl text-slate-500 group-hover:text-papGold transition-colors duration-300 drop-shadow-[0_0_10px_rgba(212,175,55,0)] group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]`}></i>
-         <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:border-papGold/50 transition-all -translate-x-4 group-hover:translate-x-0">
-            <i className="ph-bold ph-arrow-up-right text-papGold text-sm"></i>
-         </div>
-      </div>
-      
-      <div>
-        <h3 className="text-xl font-bold uppercase tracking-tight mb-3 text-white group-hover:text-papGold transition-colors">{title}</h3>
-        <p className="text-sm text-slate-400 leading-relaxed font-medium">{desc}</p>
-      </div>
-    </motion.a>
-  );
-}
+    function Differentials() {
+      return (
+        <section className="py-24 px-4 md:px-12 bg-[#0b0b0f] my-12 max-w-[1600px] mx-auto border-y border-white/5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay"></div>
 
-function Products() {
-  return (
-    <section id="produtos" className="py-24 md:py-32 px-4 md:px-12 max-w-[1600px] mx-auto relative cursor-default">
-      <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-        <div>
-          <h2 className="text-4xl md:text-5xl uppercase font-black tracking-tighter mb-4 text-glow">Categorias Premium</h2>
-          <p className="text-slate-400 text-lg max-w-2xl font-mono">Distribuição de ponta a ponta. Peças estruturais, elétricas e de performance de nível OEM.</p>
-        </div>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <ProductCard icon="ph-bold ph-faders" title="Suspensão Especializada" desc="Amortecedores originais Bilstein, molas, bandejas e kits estruturais para carros de alta performance." />
-        <ProductCard icon="ph-bold ph-target" title="Freios de Alta Precisão" desc="Discos ventilados, pastilhas de cerâmica e fluidos, garantindo a frenagem exigida pelas montadoras europeias." />
-        <ProductCard icon="ph-bold ph-engine" title="Componentes de Motor" desc="Correias, tensionadores (Febi), retentores e válvulas projetados para durabilidade extrema térmica." />
-        <ProductCard icon="ph-bold ph-drop" title="Filtros e Lubrificantes" desc="Filtros de óleo, cabine e ar originais. Lubrificantes certificados pelas normas exigentes de BMW e Mercedes." />
-        <ProductCard icon="ph-bold ph-lightning" title="Elétrica e Injeção" desc="Sensores MAF, sondas lambda, velas Iridium e bobinas dedicadas ao funcionamento perfeito da ECU." />
-        <ProductCard icon="ph-bold ph-car-profile" title="Carroceria e Suportes" desc="Acabamentos de alto padrão, coxins hidráulicos e suportes focados em isolamento antivibração OEM." />
-      </div>
-    </section>
-  );
-}
-
-function Differentials() {
-  return (
-    <section className="py-24 px-4 md:px-12 bg-[#0b0b0f] my-12 max-w-[1600px] mx-auto border-y border-white/5 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay"></div>
-      
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-         <div>
-            <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-4 font-mono">Engenharia e Procedência</div>
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6 leading-tight">Garantia Absoluta.<br/> <span className="text-papGold text-glow">Qualidade OEM.</span></h2>
-            <p className="text-slate-400 text-lg mb-8 max-w-md leading-relaxed font-medium">As maiores marcas da Europa direto para a sua oficina ou projeto. Somos obcecados pela procedência oficial e estocagem rigorosa das nossas peças.</p>
-            <PAPAccentButton outline={true} className="w-fit" onClick={() => window.open('https://wa.me/551140350765', '_blank')}>Consultar Catálogo</PAPAccentButton>
-         </div>
-         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="pap-glass p-6 rounded-sm hover:border-papSilver/50 transition-colors">
-               <h4 className="font-bold uppercase text-lg mb-2 text-white">Pronta Entrega</h4>
-               <p className="text-sm text-slate-400">Estoque robusto no Brasil com envio imediato para manter o reparo do seu veículo no cronograma.</p>
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-4 font-mono">Engenharia e Procedência</div>
+              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6 leading-tight">Garantia Absoluta.<br /> <span className="text-papGold text-glow">Qualidade OEM.</span></h2>
+              <p className="text-slate-400 text-lg mb-8 max-w-md leading-relaxed font-medium">As maiores marcas da Europa direto para a sua oficina ou projeto. Somos obcecados pela procedência oficial e estocagem rigorosa das nossas peças.</p>
+              <PAPAccentButton outline={true} className="w-fit" onClick={() => window.open('https://wa.me/551140350765', '_blank')}>Consultar Catálogo</PAPAccentButton>
             </div>
-            <div className="pap-glass p-6 rounded-sm hover:border-papSilver/50 transition-colors">
-               <h4 className="font-bold uppercase text-lg mb-2 text-white">Marcas Oficiais</h4>
-               <p className="text-sm text-slate-400">Fornecemos OEM originais como Bilstein e Febi, as mesmas usadas na linha de montagem.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="pap-glass p-6 rounded-sm hover:border-papSilver/50 transition-colors">
+                <h4 className="font-bold uppercase text-lg mb-2 text-white">Pronta Entrega</h4>
+                <p className="text-sm text-slate-400">Estoque robusto no Brasil com envio imediato para manter o reparo do seu veículo no cronograma.</p>
+              </div>
+              <div className="pap-glass p-6 rounded-sm hover:border-papSilver/50 transition-colors">
+                <h4 className="font-bold uppercase text-lg mb-2 text-white">Marcas Oficiais</h4>
+                <p className="text-sm text-slate-400">Fornecemos OEM originais como Bilstein e Febi, as mesmas usadas na linha de montagem.</p>
+              </div>
+              <div className="pap-glass p-6 rounded-sm hover:border-papSilver/50 transition-colors">
+                <h4 className="font-bold uppercase text-lg mb-2 text-white">Especialização</h4>
+                <p className="text-sm text-slate-400">Foco total nas linhas premium, entendendo cada detalhe do chassi e motor da sua marca.</p>
+              </div>
+              <div className="pap-glass p-6 rounded-sm hover:border-papGold/50 transition-colors box-glow-hover">
+                <h4 className="font-bold uppercase text-lg mb-2 text-white">Consulte Pelo Chassi</h4>
+                <p className="text-sm text-slate-400">Atendimento ultrapreciso rastreando as peças exatas através da numeração do seu chassi (VIN).</p>
+              </div>
             </div>
-            <div className="pap-glass p-6 rounded-sm hover:border-papSilver/50 transition-colors">
-               <h4 className="font-bold uppercase text-lg mb-2 text-white">Especialização</h4>
-               <p className="text-sm text-slate-400">Foco total nas linhas premium, entendendo cada detalhe do chassi e motor da sua marca.</p>
-            </div>
-            <div className="pap-glass p-6 rounded-sm hover:border-papGold/50 transition-colors box-glow-hover">
-               <h4 className="font-bold uppercase text-lg mb-2 text-white">Consulte Pelo Chassi</h4>
-               <p className="text-sm text-slate-400">Atendimento ultrapreciso rastreando as peças exatas através da numeração do seu chassi (VIN).</p>
-            </div>
-         </div>
-      </div>
-    </section>
-  );
-}
+          </div>
+        </section>
+      );
+    }
 
-function Contact() {
-  const [form, setForm] = useState({ name: '', chassi: '', part: '' });
+    function Contact() {
+      const [form, setForm] = useState({ name: '', chassi: '', part: '' });
 
-  const handleSupportRequest = (e) => {
-    e.preventDefault();
-    if(!form.name || !form.part) return;
-    const message = `*⚙️ COTAÇÃO DE PEÇAS PREMIUM*\n\n*Nome/Oficina:* ${form.name}\n*Chassi (VIN):* ${form.chassi || 'Não informado'}\n\n*Peças Solicitadas:*\n${form.part}`;
-    const url = `https://wa.me/551140350765?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
-  };
+      const handleSupportRequest = (e) => {
+        e.preventDefault();
+        if (!form.name || !form.part) return;
+        const message = `*⚙️ COTAÇÃO DE PEÇAS PREMIUM*\n\n*Nome/Oficina:* ${form.name}\n*Chassi (VIN):* ${form.chassi || 'Não informado'}\n\n*Peças Solicitadas:*\n${form.part}`;
+        const url = `https://wa.me/551140350765?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+      };
 
-  return (
-    <section id="contato" className="py-24 md:py-32 px-4 md:px-12 max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-       <div className="sticky top-32">
-         <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-4 font-mono">Matriz e Logística</div>
-         <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-tight">Bragança e<br/> <span className="text-glow">Todo o Brasil.</span></h2>
-         <p className="text-slate-400 text-lg leading-relaxed mb-12">Estamos sediados em Bragança Paulista, estrutura otimizada para despacho nacional. Fale com nossos consultores para orçar itens pelo seu chassi.</p>
-         
-         <div className="flex flex-col gap-8 mb-12">
-            <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="flex items-center gap-6 group cursor-pointer block">
-               <div className="w-16 h-16 rounded-sm bg-[#0a0a0c] border border-white/10 flex items-center justify-center group-hover:border-[#25D366] group-hover:shadow-[0_0_20px_rgba(37,211,102,0.15)] transition-all">
+      return (
+        <section id="contato" className="py-24 md:py-32 px-4 md:px-12 max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="sticky top-32">
+            <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-4 font-mono">Matriz e Logística</div>
+            <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-tight">Bragança e<br /> <span className="text-glow">Todo o Brasil.</span></h2>
+            <p className="text-slate-400 text-lg leading-relaxed mb-12">Estamos sediados em Bragança Paulista, estrutura otimizada para despacho nacional. Fale com nossos consultores para orçar itens pelo seu chassi.</p>
+
+            <div className="flex flex-col gap-8 mb-12">
+              <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="flex items-center gap-6 group cursor-pointer block">
+                <div className="w-16 h-16 rounded-sm bg-[#0a0a0c] border border-white/10 flex items-center justify-center group-hover:border-[#25D366] group-hover:shadow-[0_0_20px_rgba(37,211,102,0.15)] transition-all">
                   <i className="ph-fill ph-whatsapp-logo text-3xl text-[#25D366] group-hover:scale-110 transition-transform"></i>
-               </div>
-               <div>
+                </div>
+                <div>
                   <div className="text-xs text-slate-500 font-mono uppercase tracking-widest mb-1 group-hover:text-[#25D366]/70 transition-colors">Vendas e Orçamentos</div>
                   <div className="font-black text-2xl text-white tracking-widest">(11) 4035-0765</div>
-               </div>
-            </a>
-            
-            <a href="https://www.instagram.com/premiumautomotiveparts/" target="_blank" rel="noreferrer" className="flex items-center gap-6 group cursor-pointer block">
-               <div className="w-16 h-16 rounded-sm bg-[#0a0a0c] border border-white/10 flex items-center justify-center group-hover:border-[#E1306C] group-hover:shadow-[0_0_20px_rgba(225,48,108,0.15)] transition-all">
+                </div>
+              </a>
+
+              <a href="https://www.instagram.com/premiumautomotiveparts/" target="_blank" rel="noreferrer" className="flex items-center gap-6 group cursor-pointer block">
+                <div className="w-16 h-16 rounded-sm bg-[#0a0a0c] border border-white/10 flex items-center justify-center group-hover:border-[#E1306C] group-hover:shadow-[0_0_20px_rgba(225,48,108,0.15)] transition-all">
                   <i className="ph-fill ph-instagram-logo text-3xl text-[#E1306C] group-hover:scale-110 transition-transform"></i>
-               </div>
-               <div>
+                </div>
+                <div>
                   <div className="text-xs text-slate-500 font-mono uppercase tracking-widest mb-1 group-hover:text-[#E1306C]/70 transition-colors">Acompanhe as Novidades</div>
                   <div className="font-bold text-lg md:text-xl text-white font-mono tracking-wide">@premiumautomotiveparts</div>
-               </div>
-            </a>
+                </div>
+              </a>
 
-            <div className="flex flex-col gap-6 mt-2">
-               <div className="flex items-center gap-6 group cursor-default">
+              <div className="flex flex-col gap-6 mt-2">
+                <div className="flex items-center gap-6 group cursor-default">
                   <div className="w-16 h-16 rounded-sm bg-[#0a0a0c] border border-white/10 flex items-center justify-center group-hover:border-[#1a73e8] group-hover:shadow-[0_0_20px_rgba(26,115,232,0.15)] transition-all">
-                     <i className="ph-fill ph-map-pin text-3xl text-[#1a73e8] group-hover:scale-110 transition-transform"></i>
+                    <i className="ph-fill ph-map-pin text-3xl text-[#1a73e8] group-hover:scale-110 transition-transform"></i>
                   </div>
                   <div>
-                     <div className="text-xs text-slate-500 font-mono uppercase tracking-widest mb-1 group-hover:text-[#1a73e8]/70 transition-colors">Loja de Auto Peças e Distribuidora</div>
-                     <div className="font-bold text-lg text-white font-mono">Av. Europa, 360<br/>Jardim Europa<br/>Bragança Paulista - SP, 12919-280</div>
-                  </div>
-               </div>
-               
-               <div className="relative w-full max-w-sm lg:max-w-md h-56 rounded-[1.5rem] overflow-hidden border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.8)] group mt-2">
-                  <iframe 
-                    src="https://maps.google.com/maps?q=Premium%20Automotive%20Parts%2C%20Bragan%C3%A7a%20Paulista&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                    className="w-full h-full opacity-70 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ border: 0, filter: "invert(100%) hue-rotate(180deg) contrast(1.1) sepia(10%) grayscale(20%)" }} 
-                    allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade">
-                  </iframe>
-                  
-                  <a href="https://maps.app.goo.gl/VCCs4iG2LA6wYkMfA" target="_blank" rel="noreferrer" className="absolute top-4 left-4 bg-white text-[#1a73e8] hover:text-[#0b51b3] font-semibold text-[14px] px-3 py-2 rounded flex items-center gap-2 shadow-lg transition-colors z-10 h-[36px]">
-                     Abrir no Maps <i className="ph-bold ph-arrow-square-out text-[16px]"></i>
-                  </a>
-                  
-                  <a href="https://maps.app.goo.gl/VCCs4iG2LA6wYkMfA" target="_blank" rel="noreferrer" className="absolute inset-0 z-0"></a>
-               </div>
-            </div>
-         </div>
-       </div>
-       
-       <div className="pap-glass p-8 md:p-12 rounded-sm relative">
-         <div className="absolute -top-4 -right-4 w-24 h-24 bg-papSilver/10 rounded-full blur-2xl pointer-events-none"></div>
-         <h3 className="text-2xl font-black uppercase tracking-wide mb-8 text-white">Solicitar Orçamento</h3>
-         <form onSubmit={handleSupportRequest} className="flex flex-col gap-6 relative z-10">
-            <div className="flex flex-col gap-2">
-               <label className="text-xs font-mono tracking-widest uppercase text-slate-400">Seu Nome ou Oficina</label>
-               <input 
-                  type="text" required placeholder="Ex: Oficina MasterTech" 
-                  value={form.name} onChange={e => setForm({...form, name: e.target.value})}
-                  className="p-4 rounded-sm bg-[#040405] border border-white/10 focus:outline-none focus:border-papGold text-white transition-all font-mono text-sm shadow-inner" 
-               />
-            </div>
-            <div className="flex flex-col gap-2">
-               <label className="text-xs font-mono tracking-widest uppercase text-slate-400">Nº do Chassi (VIN) - Opcional, mas recomendado.</label>
-               <input 
-                  type="text" placeholder="Apenas letras e números..." 
-                  value={form.chassi} onChange={e => setForm({...form, chassi: e.target.value})}
-                  className="p-4 rounded-sm bg-[#040405] border border-white/10 focus:outline-none focus:border-papGold text-white transition-all font-mono text-sm shadow-inner uppercase" 
-               />
-            </div>
-            <div className="flex flex-col gap-2">
-               <label className="text-xs font-mono tracking-widest uppercase text-slate-400">Peças Necessárias</label>
-               <textarea 
-                  rows="5" required placeholder="Ex: Jogo de Velas Iridium BMW 320i 2021, Pastilha Dianteira Audi Q5..." 
-                  value={form.part} onChange={e => setForm({...form, part: e.target.value})}
-                  className="p-4 rounded-sm bg-[#040405] border border-white/10 focus:outline-none focus:border-papGold text-white transition-all font-mono text-sm resize-none shadow-inner"
-               ></textarea>
-            </div>
-            <PAPAccentButton type="submit" className="mt-4 w-full">Enviar por WhatsApp <i className="ph-bold ph-paper-plane-right"></i></PAPAccentButton>
-         </form>
-       </div>
-    </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="border-t border-white/5 bg-[#030304] py-16 px-4 md:px-12 mt-12 pb-32 md:pb-16">
-      <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-        <div className="flex items-baseline gap-1 uppercase tracking-tighter cursor-default">
-           <span className="text-2xl font-black text-white">PREMIUM</span>
-           <span className="text-2xl font-bold text-papGold">AUTOMOTIVE</span>
-        </div>
-        <ul className="flex flex-wrap items-center justify-center gap-6 text-sm font-mono tracking-tight text-slate-500">
-          <li><a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#25D366] transition-colors"><i className="ph-fill ph-whatsapp-logo text-xl"></i> (11) 4035-0765</a></li>
-          <li><a href="https://www.instagram.com/premiumautomotiveparts/" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#E1306C] transition-colors"><i className="ph-fill ph-instagram-logo text-xl"></i> @premiumautomotiveparts</a></li>
-          <li className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors"><i className="ph-fill ph-map-pin text-xl"></i> Bragança Paulista, SP</li>
-        </ul>
-        <div className="text-xs text-slate-600 font-mono tracking-widest uppercase">
-          © 2026 Premium Automotive Parts. Todos os direitos reservados.
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-function FloatingWhatsApp() {
-  return (
-    <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" title="Orçamento Rápido no WhatsApp" className="fixed bottom-6 right-6 z-50 bg-papGold text-black w-14 h-14 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-110 hover:shadow-[0_10px_40px_rgba(212,175,55,0.6)] transition-all duration-300 group">
-       <i className="ph-fill ph-whatsapp-logo text-3xl"></i>
-       <span className="absolute inset-0 rounded-full border border-papGold/50 animate-ping opacity-75"></span>
-    </a>
-  );
-}
-
-const catalogCategories = [
-  {
-    id: 'shampoo',
-    name: 'Shampoo',
-    icon: 'ph-drop',
-    products: [
-      { id: 'v-floc', name: 'V-FLOC', brand: 'Vonixx', sizes: ['240ML', '500ML', '1.5L', '3L', '5L'], indicacao: 'LAVAGEM DA PINTURA', superficie: 'EXTERNO', disponibilidade: '240ML, 500ML, 1.5L, 3L E 5L', img: './assets/products/v-floc.webp' },
-      { id: 'snow-foam-dub', name: 'SNOW FOAM', brand: 'Dub Boyz', sizes: ['500ML', '5L'], indicacao: 'PRÉ-LAVAGEM', superficie: 'EXTERNO', disponibilidade: '500ML, 5L', img: './assets/products/snow-foam-dub.png' },
-      { id: 'pro-wash-cc', name: 'PRO WASH', brand: 'Car Collection', sizes: ['500ML', '1.5L', '5L'], indicacao: 'LAVAGEM GERAL', superficie: 'EXTERNO', disponibilidade: '500ML, 1.5L, 5L', img: './assets/products/pro-wash-cc.png' },
-      { id: 'ls1-wash', name: 'LS1 DETAIL WASH', brand: 'Lincoln', sizes: ['500ML', '1.5L'], indicacao: 'LAVAGEM DETALHADA', superficie: 'EXTERNO', disponibilidade: '500ML, 1.5L', img: './assets/products/ls1-wash.png' },
-    ]
-  },
-  {
-    id: 'apc',
-    name: 'APC Limpador',
-    icon: 'ph-spray-bottle',
-    products: [
-      { id: 'delet', name: 'DELET', brand: 'Vonixx', sizes: ['500ML', '5L'], indicacao: 'PNEUS E BORRACHAS', superficie: 'LAVAGEM', disponibilidade: '500ML, 5L', img: './assets/products/delet.png' },
-      { id: 'izer', name: 'IZER', brand: 'Vonixx', sizes: ['500ML'], indicacao: 'DESCONTAMINAÇÃO', superficie: 'RODAS E PINTURA', disponibilidade: '500ML', img: './assets/products/izer.webp' },
-      { id: 'sintra-fast', name: 'SINTRA FAST', brand: 'Vonixx', sizes: ['500ML', '5L'], indicacao: 'INTERIORES', superficie: 'PAINÉIS E BANCOS', disponibilidade: '500ML, 5L', img: './assets/products/sintra-fast.png' },
-    ]
-  },
-  {
-    id: 'pretinho',
-    name: 'Pretinho',
-    icon: 'ph-tire',
-    products: [
-      { id: 'revox', name: 'REVOX', brand: 'Vonixx', sizes: ['500ML'], indicacao: 'SELANTE PARA PNEUS', superficie: 'BORRACHA', disponibilidade: '500ML', img: './assets/products/revox.png' },
-      { id: 'v-lub', name: 'V-LUB', brand: 'Vonixx', sizes: ['500ML'], indicacao: 'LUBRIFICANTE', superficie: 'PINTURA E VIDROS', disponibilidade: '500ML', img: './assets/products/v-lub.png' },
-    ]
-  },
-  {
-    id: 'restaurador',
-    name: 'Restaurador de Plástico',
-    icon: 'ph-car',
-    products: [
-      { id: 'v-plastic', name: 'V-PLASTIC', brand: 'Vonixx', sizes: ['50ML'], indicacao: 'PLÁSTICOS', superficie: 'EXTERNO', disponibilidade: '50ML', img: './assets/products/v-plastic.png' },
-      { id: 'intense', name: 'INTENSE', brand: 'Vonixx', sizes: ['500ML', '1.5L'], indicacao: 'PLÁSTICOS INTERNOS', superficie: 'INTERNO', disponibilidade: '500ML, 1.5L', img: './assets/products/intense.webp' },
-    ]
-  },
-];
-
-function VonixxPage({ onBack }) {
-  const [activeCatId, setActiveCatId] = useState(catalogCategories[0].id);
-  const activeCategory = catalogCategories.find(c => c.id === activeCatId);
-  const [selectedId, setSelectedId] = useState(activeCategory.products[0].id);
-
-  const allProducts = catalogCategories.flatMap(c => c.products);
-  const active = allProducts.find(p => p.id === selectedId) || activeCategory.products[0];
-  const [selectedSize, setSelectedSize] = useState(active.sizes[0]);
-
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-    const firstProduct = activeCategory.products[0];
-    setSelectedId(firstProduct.id);
-    setSelectedSize(firstProduct.sizes[0]);
-  }, [activeCatId]);
-
-  React.useEffect(() => {
-    setSelectedSize(active.sizes[0]);
-  }, [active.id]);
-
-  const handleWhatsApp = () => {
-    const msg = `Olá! Gostaria de saber os valores e mais informações sobre o produto *${active.name}* da marca *${active.brand}* (Volume: *${selectedSize}*).`;
-    const url = `https://wa.me/551140350765?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
-  };
-
-  return (
-    <div className="min-h-screen bg-background pt-24 pb-16">
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center border-b border-white/5 bg-background/80 backdrop-blur-xl">
-        <nav className="flex items-center justify-between px-6 py-4 w-full max-w-[1600px] text-foreground">
-          <button onClick={onBack} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer">
-            <span className="text-xl md:text-2xl font-black text-white">PREMIUM</span>
-            <span className="text-xl md:text-2xl font-semibold text-papGold">AUTOMOTIVE</span>
-          </button>
-          <button onClick={onBack} className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-papGold transition-colors">
-            <i className="ph-bold ph-arrow-left text-lg"></i> Voltar ao Site
-          </button>
-          <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-widest text-papGold flex items-center gap-2 hover:text-white transition-colors">
-            <i className="ph-fill ph-whatsapp-logo text-xl"></i> Fale Conosco
-          </a>
-        </nav>
-      </div>
-
-      <div className="max-w-[1300px] mx-auto px-4 md:px-12">
-        <div className="text-center mb-10">
-          <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-3 font-mono">Catálogo Premium</div>
-          <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white mb-3">Est&eacute;tica <span className="text-glow">Automotiva</span></h1>
-          <p className="text-slate-400 max-w-xl mx-auto text-sm">Selecione uma categoria para ver os produtos disponíveis e consultar valores via WhatsApp.</p>
-        </div>
-
-        <div className="flex flex-col lg:flex-row gap-6 items-start">
-
-          {/* Coluna esquerda: apenas categorias */}
-          <div className="flex flex-col gap-2 w-full lg:w-56 flex-shrink-0">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-1 mb-1">Categorias</div>
-            {catalogCategories.map(cat => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCatId(cat.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-sm border text-left transition-all font-bold text-sm uppercase tracking-wider ${
-                  activeCatId === cat.id
-                    ? 'border-papGold bg-papGold/15 text-papGold'
-                    : 'border-white/5 bg-[#111] text-slate-400 hover:border-papGold/30 hover:text-white'
-                }`}
-              >
-                <i className={`ph-bold ${cat.icon} text-lg flex-shrink-0`}></i>
-                <span className="flex-1 text-left">{cat.name}</span>
-                {activeCatId === cat.id && <i className="ph-bold ph-caret-right text-xs opacity-70"></i>}
-              </button>
-            ))}
-          </div>
-
-          {/* Coluna direita: grid de produtos + detalhe */}
-          <div className="flex-1">
-            {/* Título da categoria ativa */}
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/5">
-              <i className={`ph-bold ${activeCategory.icon} text-2xl text-papGold`}></i>
-              <h2 className="text-2xl font-black uppercase tracking-tight text-white">{activeCategory.name}</h2>
-              <span className="ml-auto text-xs text-slate-500 font-mono">{activeCategory.products.length} produto{activeCategory.products.length > 1 ? 's' : ''}</span>
-            </div>
-
-            {/* Grid de cards dos produtos */}
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
-              {activeCategory.products.map(p => (
-                <button
-                  key={p.id}
-                  onClick={() => setSelectedId(p.id)}
-                  className={`flex flex-col items-center p-4 rounded-lg border text-center transition-all duration-200 ${
-                    selectedId === p.id
-                      ? 'border-papGold bg-papGold/10 shadow-[0_0_20px_rgba(212,175,55,0.2)]'
-                      : 'border-white/5 bg-[#1c1c1e] hover:border-papGold/40 hover:bg-[#2a2a2a]'
-                  }`}
-                >
-                  <div className="w-24 h-24 flex items-center justify-center mb-3 bg-[#111] rounded-md p-2">
-                    <img
-                      src={p.img}
-                      alt={p.name}
-                      onError={(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/96x96/111111/D4AF37.png?text='+p.name[0]}}
-                      className="max-h-full object-contain"
-                    />
-                  </div>
-                  <div className="text-[10px] text-papGold/60 font-mono uppercase tracking-widest mb-1">{p.brand}</div>
-                  <div className={`font-black text-xs uppercase tracking-wide leading-tight ${selectedId === p.id ? 'text-papGold' : 'text-white'}`}>{p.name}</div>
-                  <div className="text-[10px] text-slate-500 mt-1">{p.sizes.join(' · ')}</div>
-                </button>
-              ))}
-            </div>
-
-            {/* Detalhe do produto selecionado */}
-            {active && (
-              <div className="bg-[#1c1c1e] p-6 rounded-xl border border-papGold/20 shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
-                <div className="flex flex-col md:flex-row gap-6 items-center mb-6">
-                  <div className="flex-shrink-0 w-36 h-36 bg-[#111] rounded-lg flex items-center justify-center p-3">
-                    <img
-                      src={active.img}
-                      alt={active.name}
-                      onError={(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/144x144/111111/D4AF37.png?text='+active.name.split(' ')[0]}}
-                      className="max-h-full object-contain hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-xs text-papGold/60 font-mono uppercase tracking-widest mb-1">{active.brand}</div>
-                    <h3 className="text-2xl font-black text-white tracking-tight mb-3">{active.name}</h3>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {active.sizes.map(size => (
-                        <button
-                          key={size}
-                          onClick={() => setSelectedSize(size)}
-                          className={`px-4 py-2 text-sm font-bold rounded-sm border transition-colors ${
-                            selectedSize === size
-                              ? 'bg-papGold text-black border-papGold'
-                              : 'bg-transparent text-slate-400 border-white/10 hover:border-papGold/50 hover:text-papGold'
-                          }`}
-                        >
-                          {size}
-                        </button>
-                      ))}
-                    </div>
-                    <div className="flex flex-col gap-[2px]">
-                      <div className="flex gap-[2px]">
-                        <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-2.5 w-[38%] uppercase tracking-wider">Indicação</div>
-                        <div className="bg-[#3a3a3c] text-white font-bold text-xs p-2.5 w-[62%] uppercase">{active.indicacao}</div>
-                      </div>
-                      <div className="flex gap-[2px]">
-                        <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-2.5 w-[38%] uppercase tracking-wider">Superfície</div>
-                        <div className="bg-[#3a3a3c] text-white font-bold text-xs p-2.5 w-[62%] uppercase">{active.superficie}</div>
-                      </div>
-                      <div className="flex gap-[2px]">
-                        <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-2.5 w-[38%] uppercase tracking-wider">Disponível</div>
-                        <div className="bg-[#3a3a3c] text-white font-bold text-xs p-2.5 w-[62%] uppercase">{active.disponibilidade}</div>
-                      </div>
-                    </div>
+                    <div className="text-xs text-slate-500 font-mono uppercase tracking-widest mb-1 group-hover:text-[#1a73e8]/70 transition-colors">Loja de Auto Peças e Distribuidora</div>
+                    <div className="font-bold text-lg text-white font-mono">Av. Europa, 360<br />Jardim Europa<br />Bragança Paulista - SP, 12919-280</div>
                   </div>
                 </div>
-                <button onClick={handleWhatsApp} className="w-full py-4 bg-[#25D366] hover:bg-white text-black font-black uppercase tracking-wider rounded-sm flex items-center justify-center gap-3 transition-colors shadow-[0_5px_20px_rgba(37,211,102,0.3)]">
-                  Consultar via WhatsApp &nbsp;<i className="ph-bold ph-whatsapp-logo text-2xl"></i>
-                </button>
+
+                <div className="relative w-full max-w-sm lg:max-w-md h-56 rounded-[1.5rem] overflow-hidden border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.8)] group mt-2">
+                  <iframe
+                    src="https://maps.google.com/maps?q=Premium%20Automotive%20Parts%2C%20Bragan%C3%A7a%20Paulista&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    className="w-full h-full opacity-70 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ border: 0, filter: "invert(100%) hue-rotate(180deg) contrast(1.1) sepia(10%) grayscale(20%)" }}
+                    allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade">
+                  </iframe>
+
+                  <a href="https://maps.app.goo.gl/VCCs4iG2LA6wYkMfA" target="_blank" rel="noreferrer" className="absolute top-4 left-4 bg-white text-[#1a73e8] hover:text-[#0b51b3] font-semibold text-[14px] px-3 py-2 rounded flex items-center gap-2 shadow-lg transition-colors z-10 h-[36px]">
+                    Abrir no Maps <i className="ph-bold ph-arrow-square-out text-[16px]"></i>
+                  </a>
+
+                  <a href="https://maps.app.goo.gl/VCCs4iG2LA6wYkMfA" target="_blank" rel="noreferrer" className="absolute inset-0 z-0"></a>
+                </div>
               </div>
-            )}
+            </div>
           </div>
 
+          <div className="pap-glass p-8 md:p-12 rounded-sm relative">
+            <div className="absolute -top-4 -right-4 w-24 h-24 bg-papSilver/10 rounded-full blur-2xl pointer-events-none"></div>
+            <h3 className="text-2xl font-black uppercase tracking-wide mb-8 text-white">Solicitar Orçamento</h3>
+            <form onSubmit={handleSupportRequest} className="flex flex-col gap-6 relative z-10">
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-mono tracking-widest uppercase text-slate-400">Seu Nome ou Oficina</label>
+                <input
+                  type="text" required placeholder="Ex: Oficina MasterTech"
+                  value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
+                  className="p-4 rounded-sm bg-[#040405] border border-white/10 focus:outline-none focus:border-papGold text-white transition-all font-mono text-sm shadow-inner"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-mono tracking-widest uppercase text-slate-400">Nº do Chassi (VIN) - Opcional, mas recomendado.</label>
+                <input
+                  type="text" placeholder="Apenas letras e números..."
+                  value={form.chassi} onChange={e => setForm({ ...form, chassi: e.target.value })}
+                  className="p-4 rounded-sm bg-[#040405] border border-white/10 focus:outline-none focus:border-papGold text-white transition-all font-mono text-sm shadow-inner uppercase"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-mono tracking-widest uppercase text-slate-400">Peças Necessárias</label>
+                <textarea
+                  rows="5" required placeholder="Ex: Jogo de Velas Iridium BMW 320i 2021, Pastilha Dianteira Audi Q5..."
+                  value={form.part} onChange={e => setForm({ ...form, part: e.target.value })}
+                  className="p-4 rounded-sm bg-[#040405] border border-white/10 focus:outline-none focus:border-papGold text-white transition-all font-mono text-sm resize-none shadow-inner"
+                ></textarea>
+              </div>
+              <PAPAccentButton type="submit" className="mt-4 w-full">Enviar por WhatsApp <i className="ph-bold ph-paper-plane-right"></i></PAPAccentButton>
+            </form>
+          </div>
+        </section>
+      );
+    }
+
+    function Footer() {
+      return (
+        <footer className="border-t border-white/5 bg-[#030304] py-16 px-4 md:px-12 mt-12 pb-32 md:pb-16">
+          <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex items-baseline gap-1 uppercase tracking-tighter cursor-default">
+              <span className="text-2xl font-black text-white">PREMIUM</span>
+              <span className="text-2xl font-bold text-papGold">AUTOMOTIVE</span>
+            </div>
+            <ul className="flex flex-wrap items-center justify-center gap-6 text-sm font-mono tracking-tight text-slate-500">
+              <li><a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#25D366] transition-colors"><i className="ph-fill ph-whatsapp-logo text-xl"></i> (11) 4035-0765</a></li>
+              <li><a href="https://www.instagram.com/premiumautomotiveparts/" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#E1306C] transition-colors"><i className="ph-fill ph-instagram-logo text-xl"></i> @premiumautomotiveparts</a></li>
+              <li className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors"><i className="ph-fill ph-map-pin text-xl"></i> Bragança Paulista, SP</li>
+            </ul>
+            <div className="text-xs text-slate-600 font-mono tracking-widest uppercase">
+              © 2026 Premium Automotive Parts. Todos os direitos reservados.
+            </div>
+          </div>
+        </footer>
+      );
+    }
+
+    function FloatingWhatsApp() {
+      return (
+        <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" title="Orçamento Rápido no WhatsApp" className="fixed bottom-6 right-6 z-50 bg-papGold text-black w-14 h-14 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-110 hover:shadow-[0_10px_40px_rgba(212,175,55,0.6)] transition-all duration-300 group">
+          <i className="ph-fill ph-whatsapp-logo text-3xl"></i>
+          <span className="absolute inset-0 rounded-full border border-papGold/50 animate-ping opacity-75"></span>
+        </a>
+      );
+    }
+
+    const catalogCategories = [
+      {
+        id: 'shampoo',
+        name: 'Shampoo',
+        icon: 'ph-drop',
+        products: [
+          { id: 'v-floc', name: 'V-FLOC', brand: 'Vonixx', sizes: ['240ML', '500ML', '1.5L', '3L', '5L'], indicacao: 'LAVAGEM DA PINTURA', superficie: 'EXTERNO', disponibilidade: '240ML, 500ML, 1.5L, 3L E 5L', img: './assets/products/v-floc.webp' },
+          { id: 'snow-foam-dub', name: 'SNOW FOAM', brand: 'Dub Boyz', sizes: ['500ML', '5L'], indicacao: 'PRÉ-LAVAGEM', superficie: 'EXTERNO', disponibilidade: '500ML, 5L', img: './assets/products/snow-foam-dub.png' },
+          { id: 'pro-wash-cc', name: 'PRO WASH', brand: 'Car Collection', sizes: ['500ML', '1.5L', '5L'], indicacao: 'LAVAGEM GERAL', superficie: 'EXTERNO', disponibilidade: '500ML, 1.5L, 5L', img: './assets/products/pro-wash-cc.png' },
+          { id: 'ls1-wash', name: 'LS1 DETAIL WASH', brand: 'Lincoln', sizes: ['500ML', '1.5L'], indicacao: 'LAVAGEM DETALHADA', superficie: 'EXTERNO', disponibilidade: '500ML, 1.5L', img: './assets/products/ls1-wash.png' },
+        ]
+      },
+      {
+        id: 'apc',
+        name: 'APC Limpador',
+        icon: 'ph-spray-bottle',
+        products: [
+          { id: 'delet', name: 'DELET', brand: 'Vonixx', sizes: ['500ML', '5L'], indicacao: 'PNEUS E BORRACHAS', superficie: 'LAVAGEM', disponibilidade: '500ML, 5L', img: './assets/products/delet.png' },
+          { id: 'izer', name: 'IZER', brand: 'Vonixx', sizes: ['500ML'], indicacao: 'DESCONTAMINAÇÃO', superficie: 'RODAS E PINTURA', disponibilidade: '500ML', img: './assets/products/izer.webp' },
+          { id: 'sintra-fast', name: 'SINTRA FAST', brand: 'Vonixx', sizes: ['500ML', '5L'], indicacao: 'INTERIORES', superficie: 'PAINÉIS E BANCOS', disponibilidade: '500ML, 5L', img: './assets/products/sintra-fast.png' },
+        ]
+      },
+      {
+        id: 'pretinho',
+        name: 'Pretinho',
+        icon: 'ph-tire',
+        products: [
+          { id: 'revox', name: 'REVOX', brand: 'Vonixx', sizes: ['500ML'], indicacao: 'SELANTE PARA PNEUS', superficie: 'BORRACHA', disponibilidade: '500ML', img: './assets/products/revox.png' },
+          { id: 'v-lub', name: 'V-LUB', brand: 'Vonixx', sizes: ['500ML'], indicacao: 'LUBRIFICANTE', superficie: 'PINTURA E VIDROS', disponibilidade: '500ML', img: './assets/products/v-lub.png' },
+        ]
+      },
+      {
+        id: 'restaurador',
+        name: 'Restaurador de Plástico',
+        icon: 'ph-car',
+        products: [
+          { id: 'v-plastic', name: 'V-PLASTIC', brand: 'Vonixx', sizes: ['50ML'], indicacao: 'PLÁSTICOS', superficie: 'EXTERNO', disponibilidade: '50ML', img: './assets/products/v-plastic.png' },
+          { id: 'intense', name: 'INTENSE', brand: 'Vonixx', sizes: ['500ML', '1.5L'], indicacao: 'PLÁSTICOS INTERNOS', superficie: 'INTERNO', disponibilidade: '500ML, 1.5L', img: './assets/products/intense.webp' },
+        ]
+      },
+    ];
+
+    function VonixxPage({ onBack }) {
+      const [activeCatId, setActiveCatId] = useState(catalogCategories[0].id);
+      const activeCategory = catalogCategories.find(c => c.id === activeCatId);
+      const [selectedId, setSelectedId] = useState(activeCategory.products[0].id);
+
+      const allProducts = catalogCategories.flatMap(c => c.products);
+      const active = allProducts.find(p => p.id === selectedId) || activeCategory.products[0];
+      const [selectedSize, setSelectedSize] = useState(active.sizes[0]);
+
+      React.useEffect(() => {
+        window.scrollTo(0, 0);
+        const firstProduct = activeCategory.products[0];
+        setSelectedId(firstProduct.id);
+        setSelectedSize(firstProduct.sizes[0]);
+      }, [activeCatId]);
+
+      React.useEffect(() => {
+        setSelectedSize(active.sizes[0]);
+      }, [active.id]);
+
+      const handleWhatsApp = () => {
+        const msg = `Olá! Gostaria de saber os valores e mais informações sobre o produto *${active.name}* da marca *${active.brand}* (Volume: *${selectedSize}*).`;
+        const url = `https://wa.me/551140350765?text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank');
+      };
+
+      return (
+        <div className="min-h-screen bg-background pt-24 pb-16">
+          <div className="fixed top-0 left-0 right-0 z-50 flex justify-center border-b border-white/5 bg-background/80 backdrop-blur-xl">
+            <nav className="flex items-center justify-between px-6 py-4 w-full max-w-[1600px] text-foreground">
+              <button onClick={onBack} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer">
+                <span className="text-xl md:text-2xl font-black text-white">PREMIUM</span>
+                <span className="text-xl md:text-2xl font-semibold text-papGold">AUTOMOTIVE</span>
+              </button>
+              <button onClick={onBack} className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-papGold transition-colors">
+                <i className="ph-bold ph-arrow-left text-lg"></i> Voltar ao Site
+              </button>
+              <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-widest text-papGold flex items-center gap-2 hover:text-white transition-colors">
+                <i className="ph-fill ph-whatsapp-logo text-xl"></i> Fale Conosco
+              </a>
+            </nav>
+          </div>
+
+          <div className="max-w-[1300px] mx-auto px-4 md:px-12">
+            <div className="text-center mb-10">
+              <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-3 font-mono">Catálogo Premium</div>
+              <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white mb-3">Est&eacute;tica <span className="text-glow">Automotiva</span></h1>
+              <p className="text-slate-400 max-w-xl mx-auto text-sm">Selecione uma categoria para ver os produtos disponíveis e consultar valores via WhatsApp.</p>
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-6 items-start">
+
+              {/* Coluna esquerda: apenas categorias */}
+              <div className="flex flex-col gap-2 w-full lg:w-56 flex-shrink-0">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-1 mb-1">Categorias</div>
+                {catalogCategories.map(cat => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCatId(cat.id)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-sm border text-left transition-all font-bold text-sm uppercase tracking-wider ${activeCatId === cat.id
+                        ? 'border-papGold bg-papGold/15 text-papGold'
+                        : 'border-white/5 bg-[#111] text-slate-400 hover:border-papGold/30 hover:text-white'
+                      }`}
+                  >
+                    <i className={`ph-bold ${cat.icon} text-lg flex-shrink-0`}></i>
+                    <span className="flex-1 text-left">{cat.name}</span>
+                    {activeCatId === cat.id && <i className="ph-bold ph-caret-right text-xs opacity-70"></i>}
+                  </button>
+                ))}
+              </div>
+
+              {/* Coluna direita: grid de produtos + detalhe */}
+              <div className="flex-1">
+                {/* Título da categoria ativa */}
+                <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/5">
+                  <i className={`ph-bold ${activeCategory.icon} text-2xl text-papGold`}></i>
+                  <h2 className="text-2xl font-black uppercase tracking-tight text-white">{activeCategory.name}</h2>
+                  <span className="ml-auto text-xs text-slate-500 font-mono">{activeCategory.products.length} produto{activeCategory.products.length > 1 ? 's' : ''}</span>
+                </div>
+
+                {/* Grid de cards dos produtos */}
+                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+                  {activeCategory.products.map(p => (
+                    <button
+                      key={p.id}
+                      onClick={() => setSelectedId(p.id)}
+                      className={`flex flex-col items-center p-4 rounded-lg border text-center transition-all duration-200 ${selectedId === p.id
+                          ? 'border-papGold bg-papGold/10 shadow-[0_0_20px_rgba(212,175,55,0.2)]'
+                          : 'border-white/5 bg-[#1c1c1e] hover:border-papGold/40 hover:bg-[#2a2a2a]'
+                        }`}
+                    >
+                      <div className="w-24 h-24 flex items-center justify-center mb-3 bg-[#111] rounded-md p-2">
+                        <img
+                          src={p.img}
+                          alt={p.name}
+                          onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/96x96/111111/D4AF37.png?text=' + p.name[0] }}
+                          className="max-h-full object-contain"
+                        />
+                      </div>
+                      <div className="text-[10px] text-papGold/60 font-mono uppercase tracking-widest mb-1">{p.brand}</div>
+                      <div className={`font-black text-xs uppercase tracking-wide leading-tight ${selectedId === p.id ? 'text-papGold' : 'text-white'}`}>{p.name}</div>
+                      <div className="text-[10px] text-slate-500 mt-1">{p.sizes.join(' · ')}</div>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Detalhe do produto selecionado */}
+                {active && (
+                  <div className="bg-[#1c1c1e] p-6 rounded-xl border border-papGold/20 shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+                    <div className="flex flex-col md:flex-row gap-6 items-center mb-6">
+                      <div className="flex-shrink-0 w-36 h-36 bg-[#111] rounded-lg flex items-center justify-center p-3">
+                        <img
+                          src={active.img}
+                          alt={active.name}
+                          onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/144x144/111111/D4AF37.png?text=' + active.name.split(' ')[0] }}
+                          className="max-h-full object-contain hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-xs text-papGold/60 font-mono uppercase tracking-widest mb-1">{active.brand}</div>
+                        <h3 className="text-2xl font-black text-white tracking-tight mb-3">{active.name}</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {active.sizes.map(size => (
+                            <button
+                              key={size}
+                              onClick={() => setSelectedSize(size)}
+                              className={`px-4 py-2 text-sm font-bold rounded-sm border transition-colors ${selectedSize === size
+                                  ? 'bg-papGold text-black border-papGold'
+                                  : 'bg-transparent text-slate-400 border-white/10 hover:border-papGold/50 hover:text-papGold'
+                                }`}
+                            >
+                              {size}
+                            </button>
+                          ))}
+                        </div>
+                        <div className="flex flex-col gap-[2px]">
+                          <div className="flex gap-[2px]">
+                            <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-2.5 w-[38%] uppercase tracking-wider">Indicação</div>
+                            <div className="bg-[#3a3a3c] text-white font-bold text-xs p-2.5 w-[62%] uppercase">{active.indicacao}</div>
+                          </div>
+                          <div className="flex gap-[2px]">
+                            <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-2.5 w-[38%] uppercase tracking-wider">Superfície</div>
+                            <div className="bg-[#3a3a3c] text-white font-bold text-xs p-2.5 w-[62%] uppercase">{active.superficie}</div>
+                          </div>
+                          <div className="flex gap-[2px]">
+                            <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-2.5 w-[38%] uppercase tracking-wider">Disponível</div>
+                            <div className="bg-[#3a3a3c] text-white font-bold text-xs p-2.5 w-[62%] uppercase">{active.disponibilidade}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button onClick={handleWhatsApp} className="w-full py-4 bg-[#25D366] hover:bg-white text-black font-black uppercase tracking-wider rounded-sm flex items-center justify-center gap-3 transition-colors shadow-[0_5px_20px_rgba(37,211,102,0.3)]">
+                      Consultar via WhatsApp &nbsp;<i className="ph-bold ph-whatsapp-logo text-2xl"></i>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+            </div>
+          </div>
+
+          <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-50 bg-papGold text-black w-14 h-14 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-110 transition-all duration-300">
+            <i className="ph-fill ph-whatsapp-logo text-3xl"></i>
+          </a>
         </div>
-      </div>
+      );
+    }
 
-      <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-50 bg-papGold text-black w-14 h-14 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-110 transition-all duration-300">
-        <i className="ph-fill ph-whatsapp-logo text-3xl"></i>
-      </a>
-    </div>
-  );
-}
+    function App() {
+      const [page, setPage] = useState('home');
 
-function App() {
-  const [page, setPage] = useState('home');
+      if (page === 'vonixx') {
+        return <VonixxPage onBack={() => setPage('home')} />;
+      }
 
-  if (page === 'vonixx') {
-    return <VonixxPage onBack={() => setPage('home')} />;
-  }
+      return (
+        <div className="relative text-base antialiased bg-background">
+          <Navbar onNavigate={(p) => { setPage(p); if (p === 'home') window.scrollTo(0, 0); }} />
+          <Hero />
+          <BrandsMarquee />
+          <Products />
+          <Differentials />
+          <Contact />
+          <Footer />
+          <FloatingWhatsApp />
+        </div>
+      );
+    }
 
-  return (
-    <div className="relative text-base antialiased bg-background">
-      <Navbar onNavigate={(p) => { setPage(p); if (p === 'home') window.scrollTo(0,0); }} />
-      <Hero />
-      <BrandsMarquee />
-      <Products />
-      <Differentials />
-      <Contact />
-      <Footer />
-      <FloatingWhatsApp />
-    </div>
-  );
-}
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
-    </script>
-  </body>
 </html>
