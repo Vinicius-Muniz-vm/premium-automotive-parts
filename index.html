@@ -452,38 +452,76 @@ function FloatingWhatsApp() {
   );
 }
 
-const vonixxProducts = [
-  { id: 'v-floc', name: 'V-FLOC', sizes: ['240ML', '500ML', '1.5L', '3L', '5L'], indicacao: 'PINTURA', superficie: 'EXTERNO', disponibilidade: '240ML, 500ML, 1.5L, 3L E 5L', img: './assets/products/v-floc.webp' },
-  { id: 'sintra-fast', name: 'SINTRA FAST', sizes: ['500ML', '5L'], indicacao: 'INTERIORES', superficie: 'PAINÉIS E BANCOS', disponibilidade: '500ML, 5L', img: './assets/products/sintra-fast.png' },
-  { id: 'revox', name: 'REVOX', sizes: ['500ML'], indicacao: 'PNEUS', superficie: 'BORRACHA', disponibilidade: '500ML', img: './assets/products/revox.png' },
-  { id: 'blend', name: 'BLEND CARNAÚBA WAX', sizes: ['100G'], indicacao: 'PINTURA', superficie: 'EXTERNO', disponibilidade: '100G', img: './assets/products/blend.png' },
-  { id: 'intense', name: 'INTENSE', sizes: ['500ML', '1.5L'], indicacao: 'PLÁSTICOS', superficie: 'INTERNO', disponibilidade: '500ML, 1.5L', img: './assets/products/intense.webp' },
-  { id: 'v-lub', name: 'V-LUB', sizes: ['500ML'], indicacao: 'DESCONTAMINAÇÃO', superficie: 'PINTURA E VIDROS', disponibilidade: '500ML', img: './assets/products/v-lub.png' },
-  { id: 'delet', name: 'DELET', sizes: ['500ML', '5L'], indicacao: 'PNEUS E BORRACHAS', superficie: 'LAVAGEM', disponibilidade: '500ML, 5L', img: './assets/products/delet.png' },
-  { id: 'izer', name: 'IZER', sizes: ['500ML'], indicacao: 'DESCONTAMINAÇÃO', superficie: 'RODAS E PINTURA', disponibilidade: '500ML', img: './assets/products/izer.webp' },
-  { id: 'v-plastic', name: 'V-PLASTIC', sizes: ['50ML'], indicacao: 'PLÁSTICOS', superficie: 'EXTERNO', disponibilidade: '50ML', img: './assets/products/v-plastic.png' },
-  { id: 'native', name: 'NATIVE PASTE WAX', sizes: ['100G'], indicacao: 'PINTURA', superficie: 'PROTEÇÃO', disponibilidade: '100G', img: './assets/products/native.png' }
+const catalogCategories = [
+  {
+    id: 'shampoo',
+    name: 'Shampoo',
+    icon: 'ph-drop',
+    products: [
+      { id: 'v-floc', name: 'V-FLOC', brand: 'Vonixx', sizes: ['240ML', '500ML', '1.5L', '3L', '5L'], indicacao: 'LAVAGEM DA PINTURA', superficie: 'EXTERNO', disponibilidade: '240ML, 500ML, 1.5L, 3L E 5L', img: './assets/products/v-floc.webp' },
+      { id: 'snow-foam-dub', name: 'SNOW FOAM', brand: 'Dub Boyz', sizes: ['500ML', '5L'], indicacao: 'PRÉ-LAVAGEM', superficie: 'EXTERNO', disponibilidade: '500ML, 5L', img: './assets/products/snow-foam-dub.png' },
+      { id: 'pro-wash-cc', name: 'PRO WASH', brand: 'Car Collection', sizes: ['500ML', '1.5L', '5L'], indicacao: 'LAVAGEM GERAL', superficie: 'EXTERNO', disponibilidade: '500ML, 1.5L, 5L', img: './assets/products/pro-wash-cc.png' },
+      { id: 'ls1-wash', name: 'LS1 DETAIL WASH', brand: 'Lincoln', sizes: ['500ML', '1.5L'], indicacao: 'LAVAGEM DETALHADA', superficie: 'EXTERNO', disponibilidade: '500ML, 1.5L', img: './assets/products/ls1-wash.png' },
+    ]
+  },
+  {
+    id: 'apc',
+    name: 'APC Limpador',
+    icon: 'ph-spray-bottle',
+    products: [
+      { id: 'delet', name: 'DELET', brand: 'Vonixx', sizes: ['500ML', '5L'], indicacao: 'PNEUS E BORRACHAS', superficie: 'LAVAGEM', disponibilidade: '500ML, 5L', img: './assets/products/delet.png' },
+      { id: 'izer', name: 'IZER', brand: 'Vonixx', sizes: ['500ML'], indicacao: 'DESCONTAMINAÇÃO', superficie: 'RODAS E PINTURA', disponibilidade: '500ML', img: './assets/products/izer.webp' },
+      { id: 'sintra-fast', name: 'SINTRA FAST', brand: 'Vonixx', sizes: ['500ML', '5L'], indicacao: 'INTERIORES', superficie: 'PAINÉIS E BANCOS', disponibilidade: '500ML, 5L', img: './assets/products/sintra-fast.png' },
+    ]
+  },
+  {
+    id: 'pretinho',
+    name: 'Pretinho',
+    icon: 'ph-tire',
+    products: [
+      { id: 'revox', name: 'REVOX', brand: 'Vonixx', sizes: ['500ML'], indicacao: 'SELANTE PARA PNEUS', superficie: 'BORRACHA', disponibilidade: '500ML', img: './assets/products/revox.png' },
+      { id: 'v-lub', name: 'V-LUB', brand: 'Vonixx', sizes: ['500ML'], indicacao: 'LUBRIFICANTE', superficie: 'PINTURA E VIDROS', disponibilidade: '500ML', img: './assets/products/v-lub.png' },
+    ]
+  },
+  {
+    id: 'restaurador',
+    name: 'Restaurador de Plástico',
+    icon: 'ph-car',
+    products: [
+      { id: 'v-plastic', name: 'V-PLASTIC', brand: 'Vonixx', sizes: ['50ML'], indicacao: 'PLÁSTICOS', superficie: 'EXTERNO', disponibilidade: '50ML', img: './assets/products/v-plastic.png' },
+      { id: 'intense', name: 'INTENSE', brand: 'Vonixx', sizes: ['500ML', '1.5L'], indicacao: 'PLÁSTICOS INTERNOS', superficie: 'INTERNO', disponibilidade: '500ML, 1.5L', img: './assets/products/intense.webp' },
+    ]
+  },
 ];
 
 function VonixxPage({ onBack }) {
-  const [selectedId, setSelectedId] = useState(vonixxProducts[0].id);
-  const active = vonixxProducts.find(p => p.id === selectedId) || vonixxProducts[0];
+  const [activeCatId, setActiveCatId] = useState(catalogCategories[0].id);
+  const activeCategory = catalogCategories.find(c => c.id === activeCatId);
+  const [selectedId, setSelectedId] = useState(activeCategory.products[0].id);
+
+  const allProducts = catalogCategories.flatMap(c => c.products);
+  const active = allProducts.find(p => p.id === selectedId) || activeCategory.products[0];
   const [selectedSize, setSelectedSize] = useState(active.sizes[0]);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
+    const firstProduct = activeCategory.products[0];
+    setSelectedId(firstProduct.id);
+    setSelectedSize(firstProduct.sizes[0]);
+  }, [activeCatId]);
+
+  React.useEffect(() => {
     setSelectedSize(active.sizes[0]);
   }, [active.id]);
 
   const handleWhatsApp = () => {
-    const msg = `Olá! Gostaria de saber os valores e mais informações sobre o produto Vonixx: *${active.name}* (Volume: *${selectedSize}*).`;
+    const msg = `Olá! Gostaria de saber os valores e mais informações sobre o produto *${active.name}* da marca *${active.brand}* (Volume: *${selectedSize}*).`;
     const url = `https://wa.me/551140350765?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
   };
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-16">
-      {/* Navbar topo da página Vonixx */}
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-center border-b border-white/5 bg-background/80 backdrop-blur-xl">
         <nav className="flex items-center justify-between px-6 py-4 w-full max-w-[1600px] text-foreground">
           <button onClick={onBack} className="flex items-baseline gap-1 uppercase tracking-tighter cursor-pointer">
@@ -499,39 +537,63 @@ function VonixxPage({ onBack }) {
         </nav>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-4 md:px-12">
-        {/* Header da página */}
-        <div className="text-center mb-12">
-          <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-4 font-mono">Linha de Estética e Limpeza</div>
-          <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-4">Produtos <span className="text-glow">Vonixx</span></h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Selecione um produto para ver as especificações e consultar disponibilidade e valores.</p>
+      <div className="max-w-[1300px] mx-auto px-4 md:px-12">
+        <div className="text-center mb-10">
+          <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-3 font-mono">Catálogo Premium</div>
+          <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white mb-3">Est&eacute;tica <span className="text-glow">Automotiva</span></h1>
+          <p className="text-slate-400 max-w-xl mx-auto text-sm">Selecione uma categoria e escolha o produto para consultar disponibilidade e valores via WhatsApp.</p>
         </div>
 
-        {/* Grid de produtos + card de detalhe */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
 
-          {/* Lista lateral de produtos */}
-          <div className="flex flex-col gap-2">
-            {vonixxProducts.map(p => (
-              <button
-                key={p.id}
-                onClick={() => setSelectedId(p.id)}
-                className={`flex items-center gap-4 p-3 rounded-sm border text-left transition-all ${
-                  selectedId === p.id
-                    ? 'border-papGold bg-papGold/10 text-papGold'
-                    : 'border-white/5 bg-[#111] text-slate-300 hover:border-papGold/30 hover:text-white'
-                }`}
-              >
-                <img src={p.img} alt={p.name} className="w-10 h-10 object-contain flex-shrink-0" />
-                <span className="font-bold text-sm uppercase tracking-wider">{p.name}</span>
-              </button>
+          {/* Coluna esquerda: Categorias + Produtos */}
+          <div className="flex flex-col gap-3">
+            {catalogCategories.map(cat => (
+              <div key={cat.id}>
+                {/* Botão de categoria */}
+                <button
+                  onClick={() => setActiveCatId(cat.id)}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-sm border text-left transition-all font-bold text-sm uppercase tracking-wider ${
+                    activeCatId === cat.id
+                      ? 'border-papGold bg-papGold/15 text-papGold'
+                      : 'border-white/5 bg-[#111] text-slate-400 hover:border-papGold/30 hover:text-white'
+                  }`}
+                >
+                  <i className={`ph-bold ${cat.icon} text-lg`}></i>
+                  {cat.name}
+                  <i className={`ph-bold ph-caret-${activeCatId === cat.id ? 'up' : 'down'} ml-auto text-xs opacity-50`}></i>
+                </button>
+
+                {/* Produtos da categoria expandida */}
+                {activeCatId === cat.id && (
+                  <div className="flex flex-col gap-1 mt-1 ml-2 pl-3 border-l border-papGold/30">
+                    {cat.products.map(p => (
+                      <button
+                        key={p.id}
+                        onClick={() => setSelectedId(p.id)}
+                        className={`flex items-center gap-3 px-3 py-2 rounded-sm text-left transition-all text-xs ${
+                          selectedId === p.id
+                            ? 'bg-papGold/10 text-papGold font-bold'
+                            : 'text-slate-400 hover:text-white'
+                        }`}
+                      >
+                        <img src={p.img} alt={p.name} className="w-8 h-8 object-contain flex-shrink-0" />
+                        <div>
+                          <div className="font-bold uppercase tracking-wide">{p.name}</div>
+                          <div className="text-[10px] opacity-60 uppercase">{p.brand}</div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
 
-          {/* Card de detalhe do produto */}
-          <div className="lg:col-span-2 bg-[#1c1c1e] p-8 rounded-xl border border-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
+          {/* Coluna direita: Card de detalhe */}
+          <div className="lg:col-span-3 bg-[#1c1c1e] p-8 rounded-xl border border-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
             <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
-              <div className="flex-shrink-0 w-48 h-48 bg-[#111] rounded-lg flex items-center justify-center p-4">
+              <div className="flex-shrink-0 w-44 h-44 bg-[#111] rounded-lg flex items-center justify-center p-4">
                 <img
                   src={active.img}
                   alt={active.name}
@@ -540,6 +602,7 @@ function VonixxPage({ onBack }) {
                 />
               </div>
               <div className="flex-1">
+                <div className="text-xs text-papGold/60 font-mono uppercase tracking-widest mb-1">{active.brand}</div>
                 <h2 className="text-3xl font-black text-white tracking-tight mb-3">{active.name}</h2>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {active.sizes.map(size => (
@@ -580,7 +643,6 @@ function VonixxPage({ onBack }) {
         </div>
       </div>
 
-      {/* Floating WhatsApp */}
       <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-50 bg-papGold text-black w-14 h-14 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-110 transition-all duration-300">
         <i className="ph-fill ph-whatsapp-logo text-3xl"></i>
       </a>
