@@ -590,12 +590,17 @@
                 <span className="text-xl md:text-2xl font-black text-white">PREMIUM</span>
                 <span className="text-xl md:text-2xl font-semibold text-papGold">AUTOMOTIVE</span>
               </button>
-              <button onClick={onBack} className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-papGold transition-colors">
-                <i className="ph-bold ph-arrow-left text-lg"></i> Voltar ao Site
-              </button>
-              <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-widest text-papGold flex items-center gap-2 hover:text-white transition-colors">
-                <i className="ph-fill ph-whatsapp-logo text-xl"></i> Fale Conosco
-              </a>
+              <div className="flex items-center gap-4">
+                <button onClick={onBack} className="hidden sm:flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-papGold transition-colors">
+                  <i className="ph-bold ph-arrow-left text-lg"></i> Voltar ao Site
+                </button>
+                <a href="https://wa.me/551140350765" target="_blank" rel="noreferrer" className="hidden sm:flex text-xs font-bold uppercase tracking-widest text-papGold flex items-center gap-2 hover:text-white transition-colors">
+                  <i className="ph-fill ph-whatsapp-logo text-xl"></i> Fale Conosco
+                </a>
+                <button onClick={onBack} className="sm:hidden text-papGold p-2 hover:bg-white/5 rounded-full transition-colors">
+                  <i className="ph-bold ph-arrow-left text-2xl"></i>
+                </button>
+              </div>
             </nav>
           </div>
 
