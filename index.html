@@ -541,103 +541,118 @@ function VonixxPage({ onBack }) {
         <div className="text-center mb-10">
           <div className="uppercase tracking-[0.2em] text-papGold font-bold text-xs mb-3 font-mono">Catálogo Premium</div>
           <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white mb-3">Est&eacute;tica <span className="text-glow">Automotiva</span></h1>
-          <p className="text-slate-400 max-w-xl mx-auto text-sm">Selecione uma categoria e escolha o produto para consultar disponibilidade e valores via WhatsApp.</p>
+          <p className="text-slate-400 max-w-xl mx-auto text-sm">Selecione uma categoria para ver os produtos disponíveis e consultar valores via WhatsApp.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
+        <div className="flex flex-col lg:flex-row gap-6 items-start">
 
-          {/* Coluna esquerda: Categorias + Produtos */}
-          <div className="flex flex-col gap-3">
+          {/* Coluna esquerda: apenas categorias */}
+          <div className="flex flex-col gap-2 w-full lg:w-56 flex-shrink-0">
+            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-1 mb-1">Categorias</div>
             {catalogCategories.map(cat => (
-              <div key={cat.id}>
-                {/* Botão de categoria */}
-                <button
-                  onClick={() => setActiveCatId(cat.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-sm border text-left transition-all font-bold text-sm uppercase tracking-wider ${
-                    activeCatId === cat.id
-                      ? 'border-papGold bg-papGold/15 text-papGold'
-                      : 'border-white/5 bg-[#111] text-slate-400 hover:border-papGold/30 hover:text-white'
-                  }`}
-                >
-                  <i className={`ph-bold ${cat.icon} text-lg`}></i>
-                  {cat.name}
-                  <i className={`ph-bold ph-caret-${activeCatId === cat.id ? 'up' : 'down'} ml-auto text-xs opacity-50`}></i>
-                </button>
-
-                {/* Produtos da categoria expandida */}
-                {activeCatId === cat.id && (
-                  <div className="flex flex-col gap-1 mt-1 ml-2 pl-3 border-l border-papGold/30">
-                    {cat.products.map(p => (
-                      <button
-                        key={p.id}
-                        onClick={() => setSelectedId(p.id)}
-                        className={`flex items-center gap-3 px-3 py-2 rounded-sm text-left transition-all text-xs ${
-                          selectedId === p.id
-                            ? 'bg-papGold/10 text-papGold font-bold'
-                            : 'text-slate-400 hover:text-white'
-                        }`}
-                      >
-                        <img src={p.img} alt={p.name} className="w-8 h-8 object-contain flex-shrink-0" />
-                        <div>
-                          <div className="font-bold uppercase tracking-wide">{p.name}</div>
-                          <div className="text-[10px] opacity-60 uppercase">{p.brand}</div>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <button
+                key={cat.id}
+                onClick={() => setActiveCatId(cat.id)}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-sm border text-left transition-all font-bold text-sm uppercase tracking-wider ${
+                  activeCatId === cat.id
+                    ? 'border-papGold bg-papGold/15 text-papGold'
+                    : 'border-white/5 bg-[#111] text-slate-400 hover:border-papGold/30 hover:text-white'
+                }`}
+              >
+                <i className={`ph-bold ${cat.icon} text-lg flex-shrink-0`}></i>
+                <span className="flex-1 text-left">{cat.name}</span>
+                {activeCatId === cat.id && <i className="ph-bold ph-caret-right text-xs opacity-70"></i>}
+              </button>
             ))}
           </div>
 
-          {/* Coluna direita: Card de detalhe */}
-          <div className="lg:col-span-3 bg-[#1c1c1e] p-8 rounded-xl border border-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
-            <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
-              <div className="flex-shrink-0 w-44 h-44 bg-[#111] rounded-lg flex items-center justify-center p-4">
-                <img
-                  src={active.img}
-                  alt={active.name}
-                  onError={(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/200x200/111111/D4AF37.png?text='+active.name.split(' ')[0]}}
-                  className="max-h-full object-contain hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="flex-1">
-                <div className="text-xs text-papGold/60 font-mono uppercase tracking-widest mb-1">{active.brand}</div>
-                <h2 className="text-3xl font-black text-white tracking-tight mb-3">{active.name}</h2>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {active.sizes.map(size => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`px-4 py-2 text-sm font-bold rounded-sm border transition-colors ${
-                        selectedSize === size
-                          ? 'bg-papGold text-black border-papGold'
-                          : 'bg-transparent text-slate-400 border-white/10 hover:border-papGold/50 hover:text-papGold'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-                <div className="flex flex-col gap-[2px]">
-                  <div className="flex gap-[2px]">
-                    <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-3 w-[40%] uppercase tracking-wider">Indicação</div>
-                    <div className="bg-[#3a3a3c] text-white font-bold text-xs p-3 w-[60%] uppercase">{active.indicacao}</div>
-                  </div>
-                  <div className="flex gap-[2px]">
-                    <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-3 w-[40%] uppercase tracking-wider">Superfície</div>
-                    <div className="bg-[#3a3a3c] text-white font-bold text-xs p-3 w-[60%] uppercase">{active.superficie}</div>
-                  </div>
-                  <div className="flex gap-[2px]">
-                    <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-3 w-[40%] uppercase tracking-wider">Disponível</div>
-                    <div className="bg-[#3a3a3c] text-white font-bold text-xs p-3 w-[60%] uppercase">{active.disponibilidade}</div>
-                  </div>
-                </div>
-              </div>
+          {/* Coluna direita: grid de produtos + detalhe */}
+          <div className="flex-1">
+            {/* Título da categoria ativa */}
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/5">
+              <i className={`ph-bold ${activeCategory.icon} text-2xl text-papGold`}></i>
+              <h2 className="text-2xl font-black uppercase tracking-tight text-white">{activeCategory.name}</h2>
+              <span className="ml-auto text-xs text-slate-500 font-mono">{activeCategory.products.length} produto{activeCategory.products.length > 1 ? 's' : ''}</span>
             </div>
-            <button onClick={handleWhatsApp} className="w-full py-4 bg-[#25D366] hover:bg-white text-black font-black uppercase tracking-wider rounded-sm flex items-center justify-center gap-3 transition-colors shadow-[0_5px_20px_rgba(37,211,102,0.3)]">
-              Consultar via WhatsApp &nbsp;<i className="ph-bold ph-whatsapp-logo text-2xl"></i>
-            </button>
+
+            {/* Grid de cards dos produtos */}
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+              {activeCategory.products.map(p => (
+                <button
+                  key={p.id}
+                  onClick={() => setSelectedId(p.id)}
+                  className={`flex flex-col items-center p-4 rounded-lg border text-center transition-all duration-200 ${
+                    selectedId === p.id
+                      ? 'border-papGold bg-papGold/10 shadow-[0_0_20px_rgba(212,175,55,0.2)]'
+                      : 'border-white/5 bg-[#1c1c1e] hover:border-papGold/40 hover:bg-[#2a2a2a]'
+                  }`}
+                >
+                  <div className="w-24 h-24 flex items-center justify-center mb-3 bg-[#111] rounded-md p-2">
+                    <img
+                      src={p.img}
+                      alt={p.name}
+                      onError={(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/96x96/111111/D4AF37.png?text='+p.name[0]}}
+                      className="max-h-full object-contain"
+                    />
+                  </div>
+                  <div className="text-[10px] text-papGold/60 font-mono uppercase tracking-widest mb-1">{p.brand}</div>
+                  <div className={`font-black text-xs uppercase tracking-wide leading-tight ${selectedId === p.id ? 'text-papGold' : 'text-white'}`}>{p.name}</div>
+                  <div className="text-[10px] text-slate-500 mt-1">{p.sizes.join(' · ')}</div>
+                </button>
+              ))}
+            </div>
+
+            {/* Detalhe do produto selecionado */}
+            {active && (
+              <div className="bg-[#1c1c1e] p-6 rounded-xl border border-papGold/20 shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+                <div className="flex flex-col md:flex-row gap-6 items-center mb-6">
+                  <div className="flex-shrink-0 w-36 h-36 bg-[#111] rounded-lg flex items-center justify-center p-3">
+                    <img
+                      src={active.img}
+                      alt={active.name}
+                      onError={(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/144x144/111111/D4AF37.png?text='+active.name.split(' ')[0]}}
+                      className="max-h-full object-contain hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs text-papGold/60 font-mono uppercase tracking-widest mb-1">{active.brand}</div>
+                    <h3 className="text-2xl font-black text-white tracking-tight mb-3">{active.name}</h3>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {active.sizes.map(size => (
+                        <button
+                          key={size}
+                          onClick={() => setSelectedSize(size)}
+                          className={`px-4 py-2 text-sm font-bold rounded-sm border transition-colors ${
+                            selectedSize === size
+                              ? 'bg-papGold text-black border-papGold'
+                              : 'bg-transparent text-slate-400 border-white/10 hover:border-papGold/50 hover:text-papGold'
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="flex flex-col gap-[2px]">
+                      <div className="flex gap-[2px]">
+                        <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-2.5 w-[38%] uppercase tracking-wider">Indicação</div>
+                        <div className="bg-[#3a3a3c] text-white font-bold text-xs p-2.5 w-[62%] uppercase">{active.indicacao}</div>
+                      </div>
+                      <div className="flex gap-[2px]">
+                        <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-2.5 w-[38%] uppercase tracking-wider">Superfície</div>
+                        <div className="bg-[#3a3a3c] text-white font-bold text-xs p-2.5 w-[62%] uppercase">{active.superficie}</div>
+                      </div>
+                      <div className="flex gap-[2px]">
+                        <div className="bg-[#3a3a3c] text-papGold font-bold text-xs p-2.5 w-[38%] uppercase tracking-wider">Disponível</div>
+                        <div className="bg-[#3a3a3c] text-white font-bold text-xs p-2.5 w-[62%] uppercase">{active.disponibilidade}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button onClick={handleWhatsApp} className="w-full py-4 bg-[#25D366] hover:bg-white text-black font-black uppercase tracking-wider rounded-sm flex items-center justify-center gap-3 transition-colors shadow-[0_5px_20px_rgba(37,211,102,0.3)]">
+                  Consultar via WhatsApp &nbsp;<i className="ph-bold ph-whatsapp-logo text-2xl"></i>
+                </button>
+              </div>
+            )}
           </div>
 
         </div>
