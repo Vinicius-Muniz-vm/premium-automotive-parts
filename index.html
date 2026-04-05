@@ -265,14 +265,14 @@
       const brands = [
         { name: "BMW", url: "./assets/brands/bmw.png" },
         { name: "MERCEDES-BENZ", url: "./assets/brands/mercedes.png" },
-        { name: "AUDI", url: "https://cdn.simpleicons.org/audi/e2e8f0", scale: 1.3 },
-        { name: "VOLVO", url: "./assets/brands/volvo.png" },
+        { name: "AUDI", url: "https://cdn.simpleicons.org/audi/e2e8f0", scale: 1.8 },
+        { name: "VOLVO", url: "./assets/brands/volvo.png", scale: 1.5 },
         { name: "PORSCHE", url: "./assets/brands/porsche.png" },
-        { name: "LAND ROVER", url: "./assets/brands/landrover.png", scale: 1.1 },
+        { name: "LAND ROVER", url: "./assets/brands/landrover.png", scale: 1.2 },
         { name: "FERRARI", url: "https://cdn.simpleicons.org/ferrari" },
         { name: "LAMBORGHINI", url: "https://cdn.simpleicons.org/lamborghini" },
         { name: "VOLKSWAGEN", url: "https://cdn.simpleicons.org/volkswagen" },
-        { name: "DODGE RAM", url: "./assets/brands/ram.png", scale: 1.3 }
+        { name: "DODGE RAM", url: "./assets/brands/ram.png", scale: 1.4 }
       ];
       return (
         <section id="marcas" className="py-12 bg-[#050507] border-y border-white/5 overflow-hidden flex relative">
@@ -286,12 +286,13 @@
           >
             {[...brands, ...brands, ...brands].map((brand, i) => (
               <div key={i} className="flex items-center gap-4 group cursor-default">
-                <img
-                  src={brand.url}
-                  alt={brand.name}
-                  className="h-10 md:h-12 w-auto object-contain opacity-100 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]"
-                  style={brand.scale ? { transform: `scale(${brand.scale})` } : {}}
-                />
+                <div style={brand.scale ? { transform: `scale(${brand.scale})` } : {}} className="flex items-center justify-center">
+                  <img
+                    src={brand.url}
+                    alt={brand.name}
+                    className="h-10 md:h-12 w-auto object-contain opacity-100 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                  />
+                </div>
                 <span className="text-2xl md:text-3xl font-black text-white/40 tracking-widest uppercase group-hover:text-white transition-colors duration-500">
                   {brand.name}
                 </span>
@@ -497,8 +498,9 @@
               <li><a href="https://www.instagram.com/premiumautomotiveparts/" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#E1306C] transition-colors"><i className="ph-fill ph-instagram-logo text-xl"></i> @premiumautomotiveparts</a></li>
               <li className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors"><i className="ph-fill ph-map-pin text-xl"></i> Bragança Paulista, SP</li>
             </ul>
-            <div className="text-xs text-slate-600 font-mono tracking-widest uppercase">
-              © 2026 Premium Automotive Parts. Todos os direitos reservados.
+            <div className="text-xs text-slate-600 font-mono tracking-widest uppercase flex flex-col items-center md:items-end gap-1 mt-6 md:mt-0 text-center md:text-right">
+              <span>© 2026 Premium Automotive Parts. Todos os direitos reservados.</span>
+              <span>Via Europe Importadora e Distribuidora: 19.584.361/0001-50</span>
             </div>
           </div>
         </footer>
